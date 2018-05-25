@@ -1,7 +1,7 @@
 (ns tic-tac-clojure.core
-  (:gen-class))
+  (:gen-class)
+  (:require [tic-tac-clojure.board :as board]))
 
 (defn -main
-  "I don't do a whole lot ... yet."
-  [& args]
-  (println "Hello, World!"))
+  []
+  (board/create-empty-board))
