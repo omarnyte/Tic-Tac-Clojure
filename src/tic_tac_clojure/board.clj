@@ -3,9 +3,25 @@
   
 (defn create-empty-board
   []
-  ({
-    0 nil 1 nil 2 nil
-    3 nil 4 nil 5 nil 
-    6 nil 7 nil 8 nil 
-  }))
+  [
+    {:pos 0 :mark nil}
+    {:pos 1 :mark nil}
+    {:pos 2 :mark nil}
+    {:pos 3 :mark nil}
+    {:pos 4 :mark nil}
+    {:pos 5 :mark nil}
+    {:pos 6 :mark nil}
+    {:pos 7 :mark nil}
+    {:pos 8 :mark nil}
+  ])
 
+(defn get-space
+  [board pos]
+  (into {} (filter 
+    (fn [item] (= pos (get item :pos))) 
+    board)))
+
+(defn empty?
+  [board pos]
+  (= nil (get (get-space board pos)
+        :mark)))
