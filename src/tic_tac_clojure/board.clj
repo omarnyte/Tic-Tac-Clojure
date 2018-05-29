@@ -17,11 +17,25 @@
 
 (defn get-space
   [board pos]
-  (into {} (filter 
-    (fn [item] (= pos (get item :pos))) 
-    board)))
+  (into {} 
+        (filter 
+          (fn [item] (= pos (get item :pos))) 
+          board)))
 
 (defn empty?
   [board pos]
   (= nil (get (get-space board pos)
-        :mark)))
+              :mark)))
+
+(defn mark-board
+  [board pos mark]
+        (map 
+          (fn [space] (if (= pos (get space :pos))
+                        (assoc space :mark mark)))
+          board))
+
+(defn tie?
+  [board]
+  (not-any? (fn [x] (nil? x)) 
+            (map (fn [space] (get space :mark))
+                  board)))
