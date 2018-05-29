@@ -4,4 +4,4 @@
 
 (defn -main
   []
-  (board/create-empty-board))
+  (board/generate-empty-board))

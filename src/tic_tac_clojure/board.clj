@@ -1,41 +1,23 @@
 (ns tic-tac-clojure.board
   (:gen-class))
-  
-(defn create-empty-board
+
+(defn generate-empty-board
   []
-  [
-    {:pos 0 :mark nil}
-    {:pos 1 :mark nil}
-    {:pos 2 :mark nil}
-    {:pos 3 :mark nil}
-    {:pos 4 :mark nil}
-    {:pos 5 :mark nil}
-    {:pos 6 :mark nil}
-    {:pos 7 :mark nil}
-    {:pos 8 :mark nil}
-  ])
+  (vec (repeat 9 nil)))
 
 (defn get-space
   [board pos]
-  (into {} 
-        (filter 
-          (fn [item] (= pos (get item :pos))) 
-          board)))
+  (nth board pos))
 
-(defn empty?
+(defn empty-space?
   [board pos]
-  (= nil (get (get-space board pos)
-              :mark)))
+  (= nil (get-space board pos)))
 
 (defn mark-board
   [board pos mark]
-        (map 
-          (fn [space] (if (= pos (get space :pos))
-                        (assoc space :mark mark)))
-          board))
+  (assoc board pos mark))
 
 (defn tie?
   [board]
   (not-any? (fn [x] (nil? x)) 
-            (map (fn [space] (get space :mark))
-                  board)))
+            board))

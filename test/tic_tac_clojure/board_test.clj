@@ -4,71 +4,41 @@
 
 ; sample boards 
 (def empty-board
-  [ {:pos 0 :mark nil}
-    {:pos 1 :mark nil}
-    {:pos 2 :mark nil}
-    {:pos 3 :mark nil}
-    {:pos 4 :mark nil}
-    {:pos 5 :mark nil}
-    {:pos 6 :mark nil}
-    {:pos 7 :mark nil}
-    {:pos 8 :mark nil} ])
+  [nil nil nil 
+  nil nil nil 
+  nil nil nil])
 
 (def one-mark-board
-  [ {:pos 0 :mark "X"}
-    {:pos 1 :mark nil}
-    {:pos 2 :mark nil}
-    {:pos 3 :mark nil}
-    {:pos 4 :mark nil}
-    {:pos 5 :mark nil}
-    {:pos 6 :mark nil}
-    {:pos 7 :mark nil}
-    {:pos 8 :mark nil} ])
+  ["X" nil nil 
+  nil nil nil 
+  nil nil nil])
 
 (def tied-board
-  [ {:pos 0 :mark "X"}
-    {:pos 1 :mark "X"}
-    {:pos 2 :mark "O"}
-    {:pos 3 :mark "O"}
-    {:pos 4 :mark "O"}
-    {:pos 5 :mark "X"}
-    {:pos 6 :mark "X"}
-    {:pos 7 :mark "O"}
-    {:pos 8 :mark "X"} ])
+  ["X" "X" "O" 
+   "O" "O" "X" 
+   "X" "O" "X"])
 
 (def x-victory-board
-  [ {:pos 0 :mark "X"}
-    {:pos 1 :mark "O"}
-    {:pos 2 :mark "O"}
-    {:pos 3 :mark nil}
-    {:pos 4 :mark "X"}
-    {:pos 5 :mark nil}
-    {:pos 6 :mark nil}
-    {:pos 7 :mark nil}
-    {:pos 8 :mark "X"} ])
+  ["X" "O" "O" 
+   nil "X" "O" 
+   nil nil "X"])
 
 (def o-victory-board
-  [ {:pos 0 :mark "O"}
-    {:pos 1 :mark "O"}
-    {:pos 2 :mark "O"}
-    {:pos 3 :mark nil}
-    {:pos 4 :mark "X"}
-    {:pos 5 :mark nil}
-    {:pos 6 :mark "X"}
-    {:pos 7 :mark nil}
-    {:pos 8 :mark "X"} ])
-
+  ["O" "O" "O" 
+   nil "X" "O" 
+   "X" nil "X"])
     
 ; tests 
-(deftest create-empty-board-test
-  (is (= empty-board (create-empty-board))))
+(deftest generate-empty-board-test
+  (is (= empty-board (generate-empty-board))))
 
 (deftest get-space-test
-  (is (= {:pos 0 :mark nil} (get-space empty-board 0))))
+  (is (= "X" (get-space one-mark-board 0)))
+  (is (= nil (get-space one-mark-board 1))))
 
-(deftest empty-test
-  (is (= true (empty? empty-board 0)))
-  (is (= false (empty? one-mark-board 0))))
+(deftest empty-space-test
+  (is (= true (empty-space? empty-board 0)))
+  (is (= false (empty-space? one-mark-board 0))))
             
 (deftest mark-board-test
   (is (= one-mark-board (mark-board empty-board 0 "X"))))
@@ -79,7 +49,9 @@
   (is (= false (tie? x-victory-board)))
   (is (= false (tie? o-victory-board))))
 
-; (deftest winner-test
-;   (is (= "X" (winner? x-victory-board)))
-;   (is (= "O" (winner? x-victory-board))))
+; (deftest get-winner-test
+;   (is (= "X" (get-winner x-victory-board)))
+;   (is (= "O" (get-winner x-victory-board))))
+
+
 
