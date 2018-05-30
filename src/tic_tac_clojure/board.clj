@@ -17,7 +17,3 @@
   [board pos mark]
   (assoc board pos mark))
 
-(defn tie?
-  [board]
-  (not-any? (fn [x] (nil? x)) 
-            board))
