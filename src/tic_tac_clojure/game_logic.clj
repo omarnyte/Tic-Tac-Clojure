@@ -20,17 +20,21 @@
             indices))
       "X"
       (if (every?
-        (fn [mark] (= "O" mark))
-        (mapv 
-          (fn [idx] (nth board idx))
-          indices))
-    "O")))
+            (fn [mark] (= "O" mark))
+            (mapv 
+              (fn [idx] (nth board idx))
+              indices))
+        "O")))
 
-; (defn winner? 
-;   ([board] winning-indices)
-;   ((if (empty? remaining-indices))
-;       false 
-;       recur (board (rest remaining-indices))))
+(defn winner? 
+  ([board] 
+    (winner? board winning-indices))
+  ([board remaining-indices]
+    (if (empty? remaining-indices)
+      nil 
+      (if (check-three board (first remaining-indices))
+        (check-three board (first remaining-indices))    
+        (recur board (rest remaining-indices))))))
 
 (defn tie?
   [board]
