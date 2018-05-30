@@ -1,19 +1,8 @@
 (ns tic-tac-clojure.board-test
   (:require [clojure.test :refer :all]
+            [tic-tac-clojure.sample-boards :refer :all]
             [tic-tac-clojure.board :refer :all]))
 
-; sample boards 
-(def empty-board
-  [nil nil nil 
-  nil nil nil 
-  nil nil nil])
-
-(def one-mark-board
-  ["X" nil nil 
-  nil nil nil 
-  nil nil nil])
-
-; tests 
 (deftest generate-empty-board-test
   (is (= empty-board (generate-empty-board))))
 

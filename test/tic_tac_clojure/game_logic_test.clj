@@ -1,29 +1,8 @@
 (ns tic-tac-clojure.game-logic-test
   (:require [clojure.test :refer :all]
+            [tic-tac-clojure.sample-boards :refer :all]
             [tic-tac-clojure.game-logic :refer :all]))
-
-; sample boards
-(def empty-board
-  [nil nil nil 
-  nil nil nil 
-  nil nil nil])
-
-(def tied-board
-  ["X" "X" "O" 
-    "O" "O" "X" 
-    "X" "O" "X"])
-
-(def x-victory-board
-  ["X" "O" "O" 
-    nil "X" "O" 
-    nil nil "X"])
-
-(def o-victory-board
-  ["O" "O" "O" 
-    nil "X" "O" 
-    "X" nil "X"])
-
-; tests
+  
 (deftest check-three-test
   (is (= "X" (check-three x-victory-board [0 4 8])))
   (is (= "O" (check-three o-victory-board [0 1 2])))
