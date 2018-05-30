@@ -43,4 +43,6 @@
 
 (defn game-over?
   [board]
-  (or (tie? board)))
+  (if (or (winner? board) (tie? board))
+    true 
+    false))

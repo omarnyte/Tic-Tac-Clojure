@@ -40,12 +40,9 @@
   (is (= false (tie? x-victory-board)))
   (is (= false (tie? o-victory-board))))
 
-; (deftest get-winner-test
-;   (is (= "X" (get-winner x-victory-board)))
-;   (is (= "O" (get-winner o-victory-board))))
-
-; (deftest game-over-test
-;   (is (= true (game-over? tied-board)))
-;   (is (= true (game-over? x-victory-board)))
-;   (is (= true (game-over? o-victory-board))))
+(deftest game-over-test
+  (is (= true (game-over? tied-board)))
+  (is (= true (game-over? x-victory-board)))
+  (is (= true (game-over? o-victory-board)))
+  (is (= false (game-over? empty-board))))
     
