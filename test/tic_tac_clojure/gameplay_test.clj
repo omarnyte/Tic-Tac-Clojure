@@ -9,6 +9,10 @@
   (is (= false (valid-move? one-mark-board 0)))
   (is (= false (valid-move? one-mark-board 9)))
   (is (= false (valid-move? one-mark-board "not a number"))))
+
+(deftest switch-player-test
+  (is (= "O" (switch-player "X"))))
+  (is (= "X" (switch-player "O")))
             
 ; (deftest make-move-test
 ;   (is (= invalid-move-message (with-out-str (make-move one-mark-board 0 "X")))))            

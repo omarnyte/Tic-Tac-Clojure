@@ -20,6 +20,12 @@
         (>= idx 0)
         (empty-space? board idx)))
 
+(defn switch-player
+  [current-player]
+  (if (= current-player "X")
+    "O"
+    "X"))
+
 ; (defn make-move
 ;   [board idx mark]
 ;   (if (empty-space? board idx)
@@ -27,6 +33,13 @@
 ;       (render-board (mark-board board idx mark)))
 ;     (print invalid-move-message)  
 ;   ))
+
+; (defn play-round
+;   [board]
+;   (if (game-over? board)
+;       (print game-over-message))
+;       (do ()
+;           ()))
 
 ; (defn start-game
 ;   ([] (start-game (generate-empty-board)))
