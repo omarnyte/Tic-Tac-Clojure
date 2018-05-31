@@ -11,7 +11,7 @@
 
 (defn empty-space?
   [board pos]
-  (= nil (get-space board pos)))
+  (nil? (get-space board pos)))
 
 (defn mark-board
   [board pos mark]
