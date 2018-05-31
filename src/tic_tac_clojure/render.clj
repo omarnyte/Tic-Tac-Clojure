@@ -8,7 +8,7 @@
 (defn convert-nils-to-spaces
   [row-subvec]
   (into [] (map (fn [mark] (if (nil? mark)
-                              "  "
+                              " "
                               mark))
                 row-subvec)))
   
@@ -18,9 +18,11 @@
 
 (defn render-board
   [board]
-  (str 
-    (fill-row (subvec board 0 3)) 
+  (println
+    (fill-row (convert-nils-to-spaces (subvec board 0 3))) 
     horizontal-divider
-    (fill-row (subvec board 3 6))
+    (fill-row (convert-nils-to-spaces (subvec board 3 6)))
     horizontal-divider
-    (fill-row (subvec board 6 9))))
+    (fill-row (convert-nils-to-spaces (subvec board 6 9)))))
+
+
