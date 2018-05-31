@@ -11,20 +11,20 @@
   [0 4 8]
   [2 4 6]])
 
-  (defn check-three
-    [board indices]
+(defn check-three
+  [board indices]
+  (if (every?
+        (fn [mark] (= "X" mark))
+        (mapv 
+          (fn [idx] (nth board idx))
+          indices))
+    "X"
     (if (every?
-          (fn [mark] (= "X" mark))
+          (fn [mark] (= "O" mark))
           (mapv 
             (fn [idx] (nth board idx))
             indices))
-      "X"
-      (if (every?
-            (fn [mark] (= "O" mark))
-            (mapv 
-              (fn [idx] (nth board idx))
-              indices))
-        "O")))
+      "O")))
 
 (defn winner? 
   ([board] 
