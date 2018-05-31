@@ -1,7 +1,7 @@
 (ns tic-tac-clojure.core
   (:gen-class)
-  (:require [tic-tac-clojure.board :as board]))
+  (:require [tic-tac-clojure.gameplay :as gameplay]))
 
 (defn -main
   []
-  (board/generate-empty-board))
+  (gameplay/start-game))
