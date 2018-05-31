@@ -25,3 +25,15 @@
   ["O" "O" "O" 
     nil "X" "O" 
     "X" nil "X"])
+
+(def rendered-empty-board
+  "   |   |   \n----------\n   |   |   \n----------\n   |   |   \n")
+  
+(def rendered-tied-board
+  " X | X | O \n----------\n O | O | X \n----------\n X | O | X \n")
+
+(def rendered-x-victory-board
+  " X | O | O \n----------\n   | X | O \n----------\n   |   | X \n")
+
+(def rendered-o-victory-board
+  " O | O | O \n----------\n   | X | O \n----------\n X |   | X \n")
