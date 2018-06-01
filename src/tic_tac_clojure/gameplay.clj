@@ -25,11 +25,13 @@
   (Integer/parseInt str)) 
 
 (defn valid-move? 
-  [board idx]
-    (and (is-number? (clojure.string/trim-newline idx))
-          (< idx 8)
-          (>= idx 0)
-          (empty-space? board idx)))
+  [board selection]
+    (and (is-number? (clojure.string/trim-newline selection))
+          (let [idx (convert-to-num selection)]
+            (and 
+              (< idx 8)
+              (>= idx 0)
+              (empty-space? board idx)))))
 
 (defn switch-player
   [current-player]

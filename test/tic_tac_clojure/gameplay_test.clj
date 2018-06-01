@@ -11,12 +11,11 @@
 (deftest convert-to-num-test
   (is (= 0 (convert-to-num "0"))))
 
-; (deftest valid-move-test
-  ; (is (= true  (valid-move? empty-board (with-in-str "0"))))
-  ; (is (= false (valid-move? one-mark-board 0)))
-  ; (is (= false (valid-move? one-mark-board 9)))
-  ; (is (= false (valid-move? one-mark-board "not a number")))
-  ; )
+(deftest valid-move-test
+  (is (= true  (valid-move? empty-board "0")))
+  (is (= false (valid-move? one-mark-board "0")))
+  (is (= false (valid-move? one-mark-board "9")))
+  (is (= false (valid-move? one-mark-board "not a number"))))
 
 (deftest switch-player-test
   (is (= "O" (switch-player "X"))))
