@@ -13,12 +13,19 @@
 (def game-over-message
   (str "Game over!"))
 
+(defn is-number?
+  [str]
+  (try (Integer/parseInt str) true
+       (catch Exception e false))) 
+
 (defn valid-move? 
   [board idx]
-  (and (number? idx)
-        (< idx 8)
-        (>= idx 0)
-        (empty-space? board idx)))
+  (do 
+    ; (println idx)
+    (and (is-number? (clojure.string/trim-newline idx))
+          (< idx 8)
+          (>= idx 0)
+          (empty-space? board idx))))
 
 (defn switch-player
   [current-player]
@@ -26,23 +33,30 @@
     "O"
     "X"))
 
-; (defn make-move
-;   [board idx mark]
-;   (if (empty-space? board idx)
-;     (do 
-;       (render-board (mark-board board idx mark)))
-;     (print invalid-move-message)  
-;   ))
+(defn make-move
+  [board idx mark]
+  (let [marked-board board]
+    (render-board (mark-board board idx mark))
+    marked-board))
 
-; (defn play-round
-;   [board]
-;   (if (game-over? board)
-;       (print game-over-message))
-;       (do ()
-;           ()))
+(defn take-turn
+  [board current-player]
+  (let [selected-idx (read-line)]
+    (if (valid-move? board selected-idx)
+      (make-move board selected-idx)
+      (print invalid-move-message))))
 
-; (defn start-game
-;   ([] (start-game (generate-empty-board)))
-;   ([board] (if (game-over? board)
-;               (str game-over-message)
-;               (str "Game isn't over!"))))
+(defn play-round
+  [board current-player]
+  (if (game-over? board)
+      (print game-over-message)
+      (do 
+        (render-board board)
+        (println "It's your turn, " current-player)
+        (let [updated-board (take-turn board current-player)]
+          (recur updated-board  
+                 (switch-player current-player))))))
+
+(defn start-game
+  []
+  (play-round (generate-empty-board) "X"))

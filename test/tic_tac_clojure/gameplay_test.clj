@@ -4,15 +4,23 @@
             [tic-tac-clojure.render :refer :all]
             [tic-tac-clojure.sample-boards :refer :all]))
 
+(deftest is-number-test
+  (is (= true (is-number? (with-in-str "0"))))
+  (is (= false (is-number? (with-in-str "a")))))
+
 (deftest valid-move-test
-  (is (= true (valid-move? empty-board 0)))
-  (is (= false (valid-move? one-mark-board 0)))
-  (is (= false (valid-move? one-mark-board 9)))
-  (is (= false (valid-move? one-mark-board "not a number"))))
+  (is (= true  (valid-move? empty-board (with-in-str "0"))))
+  ; (is (= false (valid-move? one-mark-board 0)))
+  ; (is (= false (valid-move? one-mark-board 9)))
+  ; (is (= false (valid-move? one-mark-board "not a number")))
+  )
 
 (deftest switch-player-test
   (is (= "O" (switch-player "X"))))
   (is (= "X" (switch-player "O")))
+
+; (deftest take-turn-test
+;   (is (= one-mark-board (with-in-str "0") (take-turn empty-board "X"))))
             
 ; (deftest make-move-test
 ;   (is (= invalid-move-message (with-out-str (make-move one-mark-board 0 "X")))))            
