@@ -1,9 +1,9 @@
 (ns tic-tac-clojure.gameplay
-  (:gen-class)
-  (:require [tic-tac-clojure.board :refer :all])
-  (:require [tic-tac-clojure.game-logic :refer :all])
-  (:require [tic-tac-clojure.render :refer :all]))
-
+    (:gen-class)
+    (:require [tic-tac-clojure.board :refer :all])
+    (:require [tic-tac-clojure.game-logic :refer :all])
+    (:require [tic-tac-clojure.render :refer :all]))
+  
 (def invalid-move-message
   (str "That move isn't valid. Please select another move: "))
 
@@ -13,59 +13,49 @@
 (def game-over-message
   (str "Game over!"))
 
+(defn convert-to-num
+  [str]
+  (Integer/parseInt str))
+    
 (defn is-number?
   [str]
   (do
     (try (Integer/parseInt str) 
-         true
-         (catch Exception e false))))
+          true
+          (catch Exception e false))))
+    
+(defn in-range?
+  [start end val]
+  (and (>= val start) (<= val end)))
 
-(defn convert-to-num
-  [str]
-  (Integer/parseInt str)) 
-
-(defn valid-move? 
-  [board selection]
-    (and (is-number? selection)
-          (let [idx (convert-to-num selection)]
-            (and 
-              (< idx 8)
-              (>= idx 0)
-              (empty-space? board idx)))))
+(defn valid-selection?
+  [board num]
+  (and  (in-range? 0 8 num)
+        (empty-space? board num)))
+        
+(defn take-turn 
+  [board current-player]
+  (let [selection (read-line)]
+    (if (is-number? selection)
+      (mark-board board (convert-to-num selection) current-player)
+      (recur board current-player))))
 
 (defn switch-player
   [current-player]
-  (if (= current-player "X")
-    "O"
-    "X"))
-
-(defn make-move
-  [board idx mark]
-  (let [marked-board board]
-    (render-board (mark-board board idx mark))
-    marked-board))
-
-(defn take-turn
-  [board current-player]
-  (let [selected-idx (clojure.string/trim-newline (read-line))]
-    (if (valid-move? board selected-idx)
-      (make-move board (convert-to-num selected-idx) current-player)
-      (print invalid-move-message))))
-
+  (if (= "X" current-player)
+      "O"
+      "X"))
+        
 (defn play-round
   [board current-player]
   (if (game-over? board)
-      (print game-over-message)
-      (do 
-        (render-board board)
-        (println "It's your turn, " current-player)
-        (let [updated-board (take-turn board current-player)]
-          (recur updated-board  
-                 (switch-player current-player))))))
+    (println game-over-message)
+    (do 
+      (render-board board)
+      (println selection-prompt)))
+      (recur (take-turn board current-player)
+             (switch-player current-player)))
 
 (defn start-game
   []
   (play-round (generate-empty-board) "X"))
-
-
-  
