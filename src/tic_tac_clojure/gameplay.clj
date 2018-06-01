@@ -26,7 +26,7 @@
 
 (defn valid-move? 
   [board selection]
-    (and (is-number? (clojure.string/trim-newline selection))
+    (and (is-number? selection)
           (let [idx (convert-to-num selection)]
             (and 
               (< idx 8)
@@ -47,9 +47,9 @@
 
 (defn take-turn
   [board current-player]
-  (let [selected-idx (read-line)]
+  (let [selected-idx (clojure.string/trim-newline (read-line))]
     (if (valid-move? board selected-idx)
-      (make-move board selected-idx)
+      (make-move board (convert-to-num selected-idx) current-player)
       (print invalid-move-message))))
 
 (defn play-round
