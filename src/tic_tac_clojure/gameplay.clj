@@ -36,9 +36,11 @@
 (defn take-turn 
   [board current-player]
   (let [selection (read-line)]
-    (if (is-number? selection)
+    (if (and (is-number? selection)
+             (valid-selection? board (convert-to-num selection)))
       (mark-board board (convert-to-num selection) current-player)
-      (recur board current-player))))
+      (do (println invalid-move-message)
+          (recur board current-player)))))
 
 (defn switch-player
   [current-player]
@@ -52,6 +54,7 @@
     (println game-over-message)
     (do 
       (render-board board)
+      (println "It's your turn," current-player)
       (println selection-prompt)))
       (recur (take-turn board current-player)
              (switch-player current-player)))

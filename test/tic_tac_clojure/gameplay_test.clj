@@ -22,9 +22,9 @@
   (is (= false (valid-selection? one-mark-board 0)))
   (is (= false (valid-selection? one-mark-board 9))))
 
-; (deftest play-round-test
-;   (is (= "Game over!\n" (with-out-str (play-round x-victory-board "O"))))
-;   (is (= "Game over!\n" (with-out-str (play-round tied-board "X")))))
+(deftest play-round-test
+  (is (= "Game over!\n" (with-out-str (play-round x-victory-board "O"))))
+  (is (= "Game over!\n" (with-out-str (play-round tied-board "X")))))
 
 (deftest switch-player-test
   (is (= "X" (switch-player "O")))
