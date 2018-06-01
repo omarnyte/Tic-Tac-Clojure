@@ -15,17 +15,21 @@
 
 (defn is-number?
   [str]
-  (try (Integer/parseInt str) true
-       (catch Exception e false))) 
+  (do
+    (try (Integer/parseInt str) 
+         true
+         (catch Exception e false))))
+
+(defn convert-to-num
+  [str]
+  (Integer/parseInt str)) 
 
 (defn valid-move? 
   [board idx]
-  (do 
-    ; (println idx)
     (and (is-number? (clojure.string/trim-newline idx))
           (< idx 8)
           (>= idx 0)
-          (empty-space? board idx))))
+          (empty-space? board idx)))
 
 (defn switch-player
   [current-player]
@@ -60,3 +64,6 @@
 (defn start-game
   []
   (play-round (generate-empty-board) "X"))
+
+
+  
