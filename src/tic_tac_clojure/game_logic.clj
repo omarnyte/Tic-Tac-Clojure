@@ -29,29 +29,14 @@
         (first marks)
         nil)))
 
-(defn check-three
-  [board indices]
-  (if (every?
-        (fn [mark] (= "X" mark))
-        (mapv 
-          (fn [idx] (nth board idx))
-          indices))
-    "X"
-    (if (every?
-          (fn [mark] (= "O" mark))
-          (mapv 
-            (fn [idx] (nth board idx))
-            indices))
-      "O")))
-
 (defn winner? 
   ([board] 
     (winner? board winning-indices))
   ([board remaining-indices]
     (if (empty? remaining-indices)
       nil 
-      (if (check-three board (first remaining-indices))
-        (check-three board (first remaining-indices))    
+      (if (winner-from-indices board (first remaining-indices))
+        (winner-from-indices board (first remaining-indices))    
         (recur board (rest remaining-indices))))))
 
 (defn tie?
