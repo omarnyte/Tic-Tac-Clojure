@@ -9,6 +9,11 @@
   [board pos]
   (nth board pos))
 
+(defn get-spaces
+  [board positions]
+  (mapv (fn [idx] (get-space board idx))
+        positions))
+
 (defn empty-space?
   [board pos]
   (= nil (get-space board pos)))
