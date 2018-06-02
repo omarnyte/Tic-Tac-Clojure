@@ -2,7 +2,19 @@
   (:require [clojure.test :refer :all]
             [tic-tac-clojure.sample-boards :refer :all]
             [tic-tac-clojure.game-logic :refer :all]))
+
+(deftest identical-marks-test
+  (is (= true (identical-marks? ["X" "X" "X"])))
+  (is (= true (identical-marks? ["O" "O" "O"])))
+  (is (= false (identical-marks? ["X" "X" "O"])))
+  (is (= true (identical-marks? [nil nil nil]))))
   
+; (deftest winner-from-indices-test
+;   (is (= "X" (winner-from-indices x-victory-board [0 4 8])))
+;   (is (= "O" (winner-from-indices o-victory-board [0 1 2])))
+;   (is (= nil (winner-from-indices tied-board [0 1 2])))
+;   (is (= nil (winner-from-indices empty-board [0 1 2]))))
+            
 (deftest check-three-test
   (is (= "X" (check-three x-victory-board [0 4 8])))
   (is (= "O" (check-three o-victory-board [0 1 2])))

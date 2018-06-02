@@ -1,4 +1,5 @@
 (ns tic-tac-clojure.game-logic
+  (:require [tic-tac-clojure.board :as board])
   (:gen-class))
 
 (def winning-indices
@@ -10,6 +11,18 @@
   [2 5 8]
   [0 4 8]
   [2 4 6]])
+
+(defn identical-marks?
+  [marks]
+  (let [first-mark (first marks)]
+    (every? #(= first-mark %) marks)))
+  
+; (defn winner-from-indices
+;   [board indices]
+;   (let [first-mark (board/get-space board (first indices))]
+;     (if ((every? (board/get-spaces board ((fn [mark] (= first-mark mark)))
+;         first-mark 
+;         nil))
 
 (defn check-three
   [board indices]
