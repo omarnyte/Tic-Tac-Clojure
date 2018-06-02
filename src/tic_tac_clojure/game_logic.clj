@@ -12,21 +12,22 @@
   [0 4 8]
   [2 4 6]])
 
+(defn no-nil-marks?
+  [marks]
+  (not-any? #(nil? %) marks))
+
 (defn identical-marks?
   [marks]
   (let [first-mark (first marks)]
     (every? #(= first-mark %) marks)))
 
-(defn no-nil-marks?
-  [marks]
-  (not-any? #(nil? %) marks))
-  
-; (defn winner-from-indices
-;   [board indices]
-;   (let [first-mark (board/get-space board (first indices))]
-;     (if ((every? (board/get-spaces board ((fn [mark] (= first-mark mark)))
-;         first-mark 
-;         nil))
+(defn winner-from-indices
+  [board indices]
+  (let [marks (board/get-spaces board indices)]
+    (if (and (no-nil-marks? marks)
+             (identical-marks? marks))
+        (first marks)
+        nil)))
 
 (defn check-three
   [board indices]
