@@ -16,6 +16,10 @@
   [marks]
   (let [first-mark (first marks)]
     (every? #(= first-mark %) marks)))
+
+(defn no-nil-marks?
+  [marks]
+  (not-any? #(nil? %) marks))
   
 ; (defn winner-from-indices
 ;   [board indices]

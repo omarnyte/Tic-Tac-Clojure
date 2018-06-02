@@ -8,7 +8,13 @@
   (is (= true (identical-marks? ["O" "O" "O"])))
   (is (= false (identical-marks? ["X" "X" "O"])))
   (is (= true (identical-marks? [nil nil nil]))))
-  
+
+(deftest no-nil-marks-test
+  (is (= true (no-nil-marks? ["X" "O" "X"])))
+  (is (= false (no-nil-marks? [nil "O" "O"])))
+  (is (= false (no-nil-marks? ["X" "X" nil])))
+  (is (= false (no-nil-marks? [nil nil nil]))))
+
 ; (deftest winner-from-indices-test
 ;   (is (= "X" (winner-from-indices x-victory-board [0 4 8])))
 ;   (is (= "O" (winner-from-indices o-victory-board [0 1 2])))
