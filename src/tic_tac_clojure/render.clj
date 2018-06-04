@@ -19,7 +19,7 @@
 
 (defn render-row
   [row]
-  (str (fill-row (convert-nils-to-spaces row))))
+  (fill-row (convert-nils-to-spaces row)))
 
 (defn render-board
   [board]
@@ -39,10 +39,10 @@
   ([board] 
     (render-board-recur board (divide-board-into-rows board)))
   ([board rows]
-    (if (> 1 (count rows))
+    (if (> (count rows) 1)
       (do (print (render-row (first rows)))
           (print horizontal-divider)
           (recur board (rest rows)))
-      (print render-row (first rows)))))
+      (print (render-row (first rows))))))
 
 
