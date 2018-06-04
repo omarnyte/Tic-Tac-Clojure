@@ -71,9 +71,9 @@
   (if (game-over? board)
       (println (generate-game-over-message board current-player))
       (do (println "It's your turn," current-player ".")
-          (println selection-prompt)))
+          (println selection-prompt)
           (recur (take-turn board current-player)
-                (switch-player current-player)))
+                 (switch-player current-player)))))
 
 (defn start-game
   []
