@@ -21,14 +21,8 @@
   (is (= divided-one-mark-board (divide-board-into-rows one-mark-board)))
   (is (= divided-tied-board (divide-board-into-rows tied-board))))
 
-; (deftest render-board-test 
-;   (is (= rendered-empty-board (with-out-str (render-board empty-board))))
-;   (is (= rendered-x-victory-board (with-out-str (render-board x-victory-board))))
-;   (is (= rendered-o-victory-board (with-out-str (render-board o-victory-board))))
-;   (is (= rendered-tied-board (with-out-str (render-board tied-board)))))
-
-(deftest render-board-recur-test 
-  (is (= rendered-empty-board (with-out-str (render-board-recur empty-board))))
-  (is (= rendered-x-victory-board (with-out-str (render-board-recur x-victory-board))))
-  (is (= rendered-o-victory-board (with-out-str (render-board-recur o-victory-board))))
-  (is (= rendered-tied-board (with-out-str (render-board-recur tied-board)))))
+(deftest render-board-test 
+  (is (= rendered-empty-board (with-out-str (render-board empty-board))))
+  (is (= rendered-x-victory-board (with-out-str (render-board x-victory-board))))
+  (is (= rendered-o-victory-board (with-out-str (render-board o-victory-board))))
+  (is (= rendered-tied-board (with-out-str (render-board tied-board)))))
