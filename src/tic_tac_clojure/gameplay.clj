@@ -54,20 +54,26 @@
   (if (= "X" current-player)
       "O"
       "X"))
-
-(defn game-over-message
+      
+(defn winner-message
   [winner]
-  (str winner " wins!"))
-        
+  (str (switch-player winner) " wins!"))
+      
+(defn generate-game-over-message
+  [board current-player]
+  (if (tie? board)
+      (str "It's a tied game!")
+      (winner-message current-player)))
+    
 (defn play-round
   [board current-player]
   (render-board board)
   (if (game-over? board)
-    (println (game-over-message (switch-player current-player)))
-    (do (println "It's your turn," current-player ".")
-        (println selection-prompt)))
-        (recur (take-turn board current-player)
-               (switch-player current-player)))
+      (println (generate-game-over-message board current-player))
+      (do (println "It's your turn," current-player ".")
+          (println selection-prompt)))
+          (recur (take-turn board current-player)
+                (switch-player current-player)))
 
 (defn start-game
   []
