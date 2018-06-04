@@ -21,8 +21,8 @@
   [str]
   (do
     (try (Integer/parseInt str) 
-          true
-          (catch Exception e false))))
+         true
+         (catch Exception e false))))
     
 (defn in-range?
   [start end val]
@@ -54,17 +54,20 @@
   (if (= "X" current-player)
       "O"
       "X"))
+
+(defn game-over-message
+  [winner]
+  (str winner " wins!"))
         
 (defn play-round
   [board current-player]
+  (render-board board)
   (if (game-over? board)
-    (println game-over-message)
-    (do 
-      (render-board board)
-      (println "It's your turn," current-player ".")
-      (println selection-prompt)))
-      (recur (take-turn board current-player)
-             (switch-player current-player)))
+    (println (game-over-message (switch-player current-player)))
+    (do (println "It's your turn," current-player ".")
+        (println selection-prompt)))
+        (recur (take-turn board current-player)
+               (switch-player current-player)))
 
 (defn start-game
   []
