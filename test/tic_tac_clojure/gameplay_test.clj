@@ -17,14 +17,20 @@
   (is (= true (in-range? 0 8 8)))
   (is (= false (in-range? 0 8 9))))
 
-(deftest valid-selection-test
-  (is (= true (valid-selection? empty-board 0)))
-  (is (= false (valid-selection? one-mark-board 0)))
-  (is (= false (valid-selection? one-mark-board 9))))
+(deftest valid-move-test
+  (is (= true (valid-move? empty-board 0)))
+  (is (= false (valid-move? one-mark-board 0)))
+  (is (= false (valid-move? one-mark-board 9))))
 
-(deftest play-round-test
-  (is (= "Game over!\n" (with-out-str (play-round x-victory-board "O"))))
-  (is (= "Game over!\n" (with-out-str (play-round tied-board "X")))))
+(deftest valid-selection-test
+  (is (= true (valid-selection? empty-board "0")))
+  (is (= false (valid-selection? one-mark-board "0")))
+  (is (= false (valid-selection? one-mark-board "9")))
+  (is (= false (valid-selection? one-mark-board "a"))))
+
+; (deftest play-round-test
+;   (is (= "Game over!\n" (with-out-str (play-round x-victory-board "O"))))
+;   (is (= "Game over!\n" (with-out-str (play-round tied-board "X")))))
 
 (deftest switch-player-test
   (is (= "X" (switch-player "O")))

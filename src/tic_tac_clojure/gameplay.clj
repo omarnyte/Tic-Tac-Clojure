@@ -28,19 +28,26 @@
   [start end val]
   (and (>= val start) (<= val end)))
 
-(defn valid-selection?
+(defn valid-move?
   [board num]
   (and  (in-range? 0 8 num)
         (empty-space? board num)))
+
+(defn valid-selection?
+  [board str]
+  (and (is-number? str) 
+       (valid-move? board
+                    (convert-to-num str))))
         
 (defn take-turn 
   [board current-player]
   (let [selection (read-line)]
-    (if (and (is-number? selection)
-             (valid-selection? board (convert-to-num selection)))
-      (mark-board board (convert-to-num selection) current-player)
-      (do (println invalid-move-message)
-          (recur board current-player)))))
+    (if (valid-selection? board selection)
+        (mark-board board 
+                    (convert-to-num selection) 
+                    current-player)
+        (do (println invalid-move-message)
+            (recur board current-player)))))
 
 (defn switch-player
   [current-player]
@@ -54,7 +61,7 @@
     (println game-over-message)
     (do 
       (render-board board)
-      (println "It's your turn," current-player)
+      (println "It's your turn," current-player ".")
       (println selection-prompt)))
       (recur (take-turn board current-player)
              (switch-player current-player)))
