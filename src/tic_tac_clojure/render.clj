@@ -1,6 +1,7 @@
 (ns tic-tac-clojure.render
   (:gen-class)
-  (:require [clojure.string :as string]))
+  (:require [clojure.math.numeric-tower :as math]
+            [clojure.string :as string]))
 
 (def horizontal-divider
   "----------\n")
@@ -21,23 +22,14 @@
   [row]
   (fill-row (convert-nils-to-spaces row)))
 
-(defn render-board
-  [board]
-  (println
-    (fill-row (convert-nils-to-spaces (subvec board 0 3))) 
-    horizontal-divider
-    (fill-row (convert-nils-to-spaces (subvec board 3 6)))
-    horizontal-divider
-    (fill-row (convert-nils-to-spaces (subvec board 6 9)))))
-
 (defn divide-board-into-rows
   [board] 
-  (partition 3 board))
+  (partition (math/sqrt (count board)) 
+             board))
     
-; is there a way to avoid passing board into the recursive call (since it isn't used after the initial call)?
-(defn render-board-recur
+(defn render-board
   ([board] 
-    (render-board-recur board (divide-board-into-rows board)))
+    (render-board board (divide-board-into-rows board)))
   ([board rows]
     (if (> (count rows) 1)
       (do (print (render-row (first rows)))
