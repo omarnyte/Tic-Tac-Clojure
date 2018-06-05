@@ -1,4 +1,4 @@
-(ns tic-tac-clojure.render
+(ns tic-tac-clojure.board-render
   (:gen-class)
   (:require [clojure.math.numeric-tower :as math]
             [clojure.string :as string]

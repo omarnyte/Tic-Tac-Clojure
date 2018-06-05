@@ -1,7 +1,7 @@
-(ns tic-tac-clojure.render-test
+(ns tic-tac-clojure.board-render-test
   (:require [clojure.test :refer :all]
-            [tic-tac-clojure.sample-boards :refer :all]
-            [tic-tac-clojure.render :refer :all]))
+            [tic-tac-clojure.board-render :refer :all]
+            [tic-tac-clojure.sample-boards :refer :all]))
 
 (deftest convert-nils-to-spaces-test
   (is (= [" " " " " "] (convert-nils-to-spaces [nil nil nil])))

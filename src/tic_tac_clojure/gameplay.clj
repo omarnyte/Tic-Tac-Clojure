@@ -1,9 +1,9 @@
 (ns tic-tac-clojure.gameplay
     (:gen-class)
     (:require [tic-tac-clojure.board :refer :all])
+    (:require [tic-tac-clojure.board-render :refer :all])
     (:require [tic-tac-clojure.game-logic :refer :all])
-    (:require [tic-tac-clojure.message-render :refer :all])
-    (:require [tic-tac-clojure.render :refer :all]))
+    (:require [tic-tac-clojure.message-render :refer :all]))
 
 (defn convert-to-num
   [str]
@@ -37,11 +37,11 @@
     (print-to-cli tied-game-message))
     (print-to-cli (generate-winner-message previous-player)))
   
-  (defn switch-player
-    [current-player]
-    (if (= "X" current-player)
-        "O"
-        "X"))
+(defn switch-player
+  [current-player]
+  (if (= "X" current-player)
+      "O"
+      "X"))
 
 (defn take-turn 
   [board current-player]

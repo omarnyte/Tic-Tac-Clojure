@@ -13,13 +13,13 @@
 (def game-over-message
   (str "Game over!"))
   
-(defn print-to-cli
-  [message]
-  (println (str message)))
-
 (defn generate-winner-message
   [winner]
   (str winner " wins!"))
+
+(defn print-to-cli
+  [message]
+  (println (str message)))
 
 (defn generate-move-selection-prompt
   [current-player]
