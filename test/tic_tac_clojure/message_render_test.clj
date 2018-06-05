@@ -9,6 +9,6 @@
   (is (= "X wins!" (generate-winner-message "X")))
   (is (= "O wins!" (generate-winner-message "O"))))
 
-; (deftest generate-move-selection-prompt-test
-;   (is (= "It's your turn, X." (generate-move-selection-prompt "X")))
-;   (is (= "It's your turn, O." (generate-move-selection-prompt "O"))))
+(deftest generate-move-selection-prompt-test
+  (is (= "It's your turn, X." (generate-move-selection-prompt "X")))
+  (is (= "It's your turn, O." (generate-move-selection-prompt "O"))))

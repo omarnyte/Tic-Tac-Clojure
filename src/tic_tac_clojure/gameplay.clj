@@ -31,6 +31,18 @@
        (valid-move? board
                     (convert-to-num str))))
         
+(defn handle-game-over
+  [board previous-player]
+  (if (tie? board)
+    (print-to-cli tied-game-message))
+    (print-to-cli (generate-winner-message previous-player)))
+  
+  (defn switch-player
+    [current-player]
+    (if (= "X" current-player)
+        "O"
+        "X"))
+
 (defn take-turn 
   [board current-player]
   (let [selection (read-line)]
@@ -40,24 +52,12 @@
                     current-player)
         (do (print-to-cli invalid-move-message)
             (recur board current-player)))))
-
-(defn switch-player
-  [current-player]
-  (if (= "X" current-player)
-      "O"
-      "X"))
-      
-(defn generate-game-over-message
-  [board current-player]
-  (if (tie? board)
-      (str "It's a tied game!")
-      (generate-winner-message current-player)))
     
 (defn play-round
   [board current-player]
   (render-board board)
   (if (game-over? board)
-      (print-to-cli (generate-game-over-message board (switch-player current-player)))
+      (handle-game-over board (switch-player current-player))
       (do (print-to-cli (generate-move-selection-prompt current-player))
           (recur (take-turn board current-player)
                  (switch-player current-player)))))

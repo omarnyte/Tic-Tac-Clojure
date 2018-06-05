@@ -31,10 +31,6 @@
 (deftest switch-player-test
   (is (= "X" (switch-player "O")))
   (is (= "O" (switch-player "X"))))
-
-(deftest generate-game-over-message-test
-  (is (= "X wins!" (generate-game-over-message x-victory-board "O")))
-  (is (= "It's a tied game!" (generate-game-over-message tied-board "X"))))
   
 ; (deftest play-round-test
 ;   (is (= "X wins!\n" (with-out-str (play-round x-victory-board "O"))))
