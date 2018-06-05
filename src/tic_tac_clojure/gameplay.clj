@@ -25,8 +25,8 @@
 (defn handle-game-over
   [board previous-player]
   (if (tie? board)
-    (print-to-cli tied-game-message))
-    (print-to-cli (generate-winner-message previous-player)))
+    (print-to-cli tied-game-message)
+    (print-to-cli (generate-winner-message previous-player))))
   
 (defn switch-player
   [current-player]

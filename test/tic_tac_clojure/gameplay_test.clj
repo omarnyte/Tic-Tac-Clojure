@@ -21,6 +21,10 @@
   (is (= "O" (switch-player "X"))))
   
 (deftest play-round-test
-  (is (= "X wins!\n" (with-out-str (play-round x-victory-board "O"))))
-  (is (= "O wins!\n" (with-out-str (play-round o-victory-board "X"))))
-  (is (= "It's a tied game!\n" (with-out-str (play-round tied-board "X")))))
+  (is (= (str rendered-x-victory-board "X wins!\n") 
+              (with-out-str (play-round x-victory-board "O"))))
+  (is (= (str rendered-o-victory-board "O wins!\n") 
+         (with-out-str (play-round o-victory-board "X"))))
+  (is (= (str rendered-tied-board "It's a tie!\n") 
+         (with-out-str (play-round tied-board "X")))))
+

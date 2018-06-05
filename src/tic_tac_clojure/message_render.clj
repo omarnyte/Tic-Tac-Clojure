@@ -20,7 +20,6 @@
 
 (defn generate-move-selection-prompt
   [current-player]
-  (do (print-to-cli (str "It's your turn," current-player "."))
-      (print-to-cli selection-prompt)))
+  (str "It's your turn, " current-player ".\n" selection-prompt))
 
     
