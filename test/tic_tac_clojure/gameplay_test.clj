@@ -32,10 +32,6 @@
   (is (= "X" (switch-player "O")))
   (is (= "O" (switch-player "X"))))
 
-(deftest winner-message-test
-  (is (= "O wins!" (generate-winner-message "X")))
-  (is (= "X wins!" (generate-winner-message "O"))))
-
 (deftest generate-game-over-message-test
   (is (= "X wins!" (generate-game-over-message x-victory-board "O")))
   (is (= "It's a tied game!" (generate-game-over-message tied-board "X"))))

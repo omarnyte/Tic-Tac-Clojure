@@ -2,16 +2,8 @@
     (:gen-class)
     (:require [tic-tac-clojure.board :refer :all])
     (:require [tic-tac-clojure.game-logic :refer :all])
+    (:require [tic-tac-clojure.message-render :refer :all])
     (:require [tic-tac-clojure.render :refer :all]))
-  
-(def invalid-move-message
-  (str "That move isn't valid. Please select another move: "))
-
-(def selection-prompt
-  (str "Please choose an index to mark your move: "))
-
-(def game-over-message
-  (str "Game over!"))
 
 (defn convert-to-num
   [str]
@@ -55,10 +47,6 @@
       "O"
       "X"))
       
-(defn generate-winner-message
-  [winner]
-  (str (switch-player winner) " wins!"))
-      
 (defn generate-game-over-message
   [board current-player]
   (if (tie? board)
@@ -74,7 +62,7 @@
   [board current-player]
   (render-board board)
   (if (game-over? board)
-      (print-to-cli (generate-game-over-message board current-player))
+      (print-to-cli (generate-game-over-message board (switch-player current-player)))
       (do (print-to-cli (generate-move-selection-prompt current-player))
           (recur (take-turn board current-player)
                  (switch-player current-player)))))
