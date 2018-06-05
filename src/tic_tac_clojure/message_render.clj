@@ -9,9 +9,6 @@
 
 (def tied-game-message
   (str "It's a tie!"))
-
-(def game-over-message
-  (str "Game over!"))
   
 (defn generate-winner-message
   [winner]

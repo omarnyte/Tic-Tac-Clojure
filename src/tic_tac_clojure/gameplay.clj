@@ -1,9 +1,9 @@
 (ns tic-tac-clojure.gameplay
-    (:gen-class)
-    (:require [tic-tac-clojure.board :refer :all])
-    (:require [tic-tac-clojure.board-render :refer :all])
-    (:require [tic-tac-clojure.game-logic :refer :all])
-    (:require [tic-tac-clojure.message-render :refer :all]))
+  (:gen-class)
+  (:require [tic-tac-clojure.board :refer :all])
+  (:require [tic-tac-clojure.board-render :refer :all])
+  (:require [tic-tac-clojure.game-logic :refer :all])
+  (:require [tic-tac-clojure.message-render :refer :all]))
 
 (defn convert-to-num
   [str]

@@ -7,7 +7,7 @@
 (def horizontal-divider
   "----------")
 
-(defn convert-nils-to-spaces
+(defn- convert-nils-to-spaces
   [row-subvec]
   (into [] 
         (map (fn [mark] (if (nil? mark)
@@ -15,15 +15,15 @@
                                   mark))
             row-subvec)))
   
-(defn fill-row
+(defn- fill-row
   [row-subvec]
   (str " " (string/join " | " row-subvec) " "))
 
-(defn render-row
+(defn- render-row
   [row]
   (fill-row (convert-nils-to-spaces row)))
 
-(defn divide-board-into-rows
+(defn- divide-board-into-rows
   [board] 
   (partition (math/sqrt (count board)) 
              board))
