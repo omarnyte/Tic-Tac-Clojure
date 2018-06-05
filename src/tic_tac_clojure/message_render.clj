@@ -9,7 +9,17 @@
 
 (def game-over-message
   (str "Game over!"))
+  
+(defn print-to-cli
+  [message]
+  (println (str message)))
 
 (defn generate-winner-message
   [winner]
   (str winner " wins!"))
+
+(defn generate-move-selection-prompt
+  [current-player]
+  (do (print-to-cli (str "It's your turn," current-player "."))
+      (print-to-cli selection-prompt)))
+

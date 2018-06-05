@@ -52,11 +52,6 @@
   (if (tie? board)
       (str "It's a tied game!")
       (generate-winner-message current-player)))
-
-(defn generate-move-selection-prompt
-  [current-player]
-  (do (print-to-cli (str "It's your turn," current-player "."))
-      (print-to-cli selection-prompt)))
     
 (defn play-round
   [board current-player]

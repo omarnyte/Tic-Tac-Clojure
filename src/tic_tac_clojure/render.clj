@@ -1,7 +1,8 @@
 (ns tic-tac-clojure.render
   (:gen-class)
   (:require [clojure.math.numeric-tower :as math]
-            [clojure.string :as string]))
+            [clojure.string :as string]
+            [tic-tac-clojure.message-render :refer :all]))
 
 (def horizontal-divider
   "----------")
@@ -26,10 +27,6 @@
   [board] 
   (partition (math/sqrt (count board)) 
              board))
-
-(defn print-to-cli
-  [message]
-  (println (str message)))
     
 (defn render-board
   ([board] 
