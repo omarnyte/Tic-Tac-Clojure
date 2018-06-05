@@ -1,5 +1,5 @@
 (ns tic-tac-clojure.game-logic
-  (:require [tic-tac-clojure.board :as board])
+  (:require [tic-tac-clojure.board :refer :all])
   (:gen-class))
 
 (def winning-indices
@@ -12,6 +12,15 @@
   [0 4 8]
   [2 4 6]])
 
+(defn in-range?
+  [start end val]
+  (and (>= val start) (<= val end)))
+
+(defn valid-move?
+  [board num]
+  (and  (in-range? 0 8 num)
+        (empty-space? board num)))
+
 (defn- no-nil-marks?
   [marks]
   (not-any? #(nil? %) marks))
@@ -23,7 +32,7 @@
 
 (defn- winner-from-indices
   [board indices]
-  (let [marks (board/get-spaces board indices)]
+  (let [marks (get-spaces board indices)]
     (if (and (no-nil-marks? marks)
              (identical-marks? marks))
         (first marks)

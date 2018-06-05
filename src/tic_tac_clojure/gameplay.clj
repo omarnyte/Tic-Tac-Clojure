@@ -12,18 +12,9 @@
 (defn is-number?
   [str]
   (do
-    (try (Integer/parseInt str) 
+    (try (convert-to-num str) 
          true
          (catch Exception e false))))
-    
-(defn in-range?
-  [start end val]
-  (and (>= val start) (<= val end)))
-
-(defn valid-move?
-  [board num]
-  (and  (in-range? 0 8 num)
-        (empty-space? board num)))
 
 (defn valid-selection?
   [board str]

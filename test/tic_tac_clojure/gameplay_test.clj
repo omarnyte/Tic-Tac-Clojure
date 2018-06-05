@@ -10,17 +10,6 @@
   (is (= true (is-number? "0")))
   (is (= false (is-number? "a"))))
             
-(deftest in-range-test
-  (is (= true (in-range? 0 8 0)))
-  (is (= true (in-range? 0 8 4)))
-  (is (= true (in-range? 0 8 8)))
-  (is (= false (in-range? 0 8 9))))
-
-(deftest valid-move-test
-  (is (= true (valid-move? empty-board 0)))
-  (is (= false (valid-move? one-mark-board 0)))
-  (is (= false (valid-move? one-mark-board 9))))
-
 (deftest valid-selection-test
   (is (= true (valid-selection? empty-board "0")))
   (is (= false (valid-selection? one-mark-board "0")))
