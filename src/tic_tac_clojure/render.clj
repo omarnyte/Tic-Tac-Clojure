@@ -26,6 +26,10 @@
   [board] 
   (partition (math/sqrt (count board)) 
              board))
+
+(defn print-to-cli
+  [msg]
+  (println msg))
     
 (defn render-board
   ([board] 
@@ -36,5 +40,4 @@
           (print horizontal-divider)
           (recur board (rest rows)))
       (print (render-row (first rows))))))
-
 

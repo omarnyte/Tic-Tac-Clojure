@@ -16,6 +16,9 @@
   (is (= "   |   |   \n" (render-row [nil nil nil])))
   (is (= " X |   | O \n" (render-row ["X" nil "O"]))))
 
+(deftest print-to-cli-test
+  (is (= "Hello, world!\n" (with-out-str (print-to-cli "Hello, world!")))))
+  
 (deftest divide-board-into-rows-test
   (is (= divided-empty-board (divide-board-into-rows empty-board)))
   (is (= divided-one-mark-board (divide-board-into-rows one-mark-board)))
