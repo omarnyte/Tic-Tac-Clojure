@@ -28,8 +28,8 @@
              board))
 
 (defn print-to-cli
-  [str]
-  (println str))
+  [message]
+  (println (str message)))
     
 (defn render-board
   ([board] 
