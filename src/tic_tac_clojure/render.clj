@@ -4,7 +4,7 @@
             [clojure.string :as string]))
 
 (def horizontal-divider
-  "----------\n")
+  "----------")
 
 (defn convert-nils-to-spaces
   [row-subvec]
@@ -16,7 +16,7 @@
   
 (defn fill-row
   [row-subvec]
-  (str " " (string/join " | " row-subvec) " \n"))
+  (str " " (string/join " | " row-subvec) " "))
 
 (defn render-row
   [row]
@@ -28,16 +28,15 @@
              board))
 
 (defn print-to-cli
-  [msg]
-  (println msg))
+  [str]
+  (println str))
     
 (defn render-board
   ([board] 
     (render-board board (divide-board-into-rows board)))
   ([board rows]
     (if (> (count rows) 1)
-      (do (print (render-row (first rows)))
-          (print horizontal-divider)
+      (do (print-to-cli (render-row (first rows)))
+          (print-to-cli horizontal-divider)
           (recur board (rest rows)))
-      (print (render-row (first rows))))))
-
+      (print-to-cli (render-row (first rows))))))

@@ -8,13 +8,13 @@
   (is (= ["X" " " "X"] (convert-nils-to-spaces ["X" nil "X"])))) 
  
 (deftest fill-row-test
-  (is (= "   |   |   \n" (fill-row [" " " " " "])))
-  (is (= " X | X | O \n" (fill-row ["X" "X" "O"])))
-  (is (= " X |   | O \n" (fill-row ["X" " " "O"])))) 
+  (is (= "   |   |   " (fill-row [" " " " " "])))
+  (is (= " X | X | O " (fill-row ["X" "X" "O"])))
+  (is (= " X |   | O " (fill-row ["X" " " "O"])))) 
 
 (deftest render-row-test
-  (is (= "   |   |   \n" (render-row [nil nil nil])))
-  (is (= " X |   | O \n" (render-row ["X" nil "O"]))))
+  (is (= "   |   |   " (render-row [nil nil nil])))
+  (is (= " X |   | O " (render-row ["X" nil "O"]))))
 
 (deftest print-to-cli-test
   (is (= "Hello, world!\n" (with-out-str (print-to-cli "Hello, world!")))))

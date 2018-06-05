@@ -46,7 +46,7 @@
         (mark-board board 
                     (convert-to-num selection) 
                     current-player)
-        (do (println invalid-move-message)
+        (do (print-to-cli invalid-move-message)
             (recur board current-player)))))
 
 (defn switch-player
@@ -55,7 +55,7 @@
       "O"
       "X"))
       
-(defn winner-message
+(defn generate-winner-message
   [winner]
   (str (switch-player winner) " wins!"))
       
@@ -63,15 +63,19 @@
   [board current-player]
   (if (tie? board)
       (str "It's a tied game!")
-      (winner-message current-player)))
+      (generate-winner-message current-player)))
+
+(defn generate-move-selection-prompt
+  [current-player]
+  (do (print-to-cli (str "It's your turn," current-player "."))
+      (print-to-cli selection-prompt)))
     
 (defn play-round
   [board current-player]
   (render-board board)
   (if (game-over? board)
-      (println (generate-game-over-message board current-player))
-      (do (println "It's your turn," current-player ".")
-          (println selection-prompt)
+      (print-to-cli (generate-game-over-message board current-player))
+      (do (print-to-cli (generate-move-selection-prompt current-player))
           (recur (take-turn board current-player)
                  (switch-player current-player)))))
 
