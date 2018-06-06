@@ -26,6 +26,11 @@
     nil "X" "O" 
     "X" nil "X"])
 
+(def near-x-victory-board
+  [nil "O" "O" 
+   nil "X" "O" 
+   nil nil "X"])
+    
 (def divided-empty-board
   [[nil nil nil] 
    [nil nil nil] 
@@ -52,4 +57,6 @@
 
 (def rendered-o-victory-board
   " O | O | O \n----------\n   | X | O \n----------\n X |   | X \n")
-  
+
+(def rendered-near-x-victory-board
+  "   | O | O \n----------\n   | X | O \n----------\n   |   | X \n")

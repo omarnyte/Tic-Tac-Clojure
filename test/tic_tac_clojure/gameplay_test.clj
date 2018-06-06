@@ -24,7 +24,11 @@
   (is (= (str rendered-x-victory-board "X wins!\n") 
               (with-out-str (play-round x-victory-board "O"))))
   (is (= (str rendered-o-victory-board "O wins!\n") 
-         (with-out-str (play-round o-victory-board "X"))))
+              (with-out-str (play-round o-victory-board "X"))))
   (is (= (str rendered-tied-board "It's a tie!\n") 
-         (with-out-str (play-round tied-board "X")))))
-
+              (with-out-str (play-round tied-board "X"))))
+  (is (= (str rendered-near-x-victory-board 
+              "It's your turn, X.\nPlease choose an index to mark your move: \n"
+              rendered-x-victory-board 
+              "X wins!\n")
+         (with-in-str "0" (with-out-str (play-round near-x-victory-board "X"))))))
