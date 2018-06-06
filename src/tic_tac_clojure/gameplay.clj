@@ -3,7 +3,8 @@
   (:require [tic-tac-clojure.board :refer :all])
   (:require [tic-tac-clojure.board-render :refer :all])
   (:require [tic-tac-clojure.game-logic :refer :all])
-  (:require [tic-tac-clojure.message-render :refer :all]))
+  (:require [tic-tac-clojure.message-render :refer :all])
+  (:require [tic-tac-clojure.player :refer :all]))
 
 (defn convert-to-num
   [str]
@@ -45,18 +46,26 @@
             (recur board current-player)))))
     
 (defn play-round
-  [board current-player]
+  [board curr-player opp-player]
   (render-board board)
   (if (game-over? board)
-      (handle-game-over board (switch-player current-player))
-      (do (print-to-cli (generate-move-selection-prompt current-player))
-          (recur (take-turn board current-player)
-                 (switch-player current-player)))))
+      (print-to-cli "Game is over!")
+      ; (handle-game-over board (switch-players curr-player))
+      (do (print-to-cli (generate-move-selection-prompt (get-player-mark curr-player)))
+          (recur (take-turn board (get-player-mark curr-player))
+                  opp-player
+                  curr-player))))
 
- (defn valid-game-selection?
+(defn valid-game-selection?
   [str]
   (and (is-number? str) 
-       (in-range? 1 2 (convert-to-num str))))
+        (in-range? 1 2 (convert-to-num str))))
+
+; (defn start-selected-game
+;   [num]
+;   (case num
+;     1 (play-round (generate-empty-board) "X")
+;     2 (play-against)))
                  
 (defn start-game
   []
@@ -65,8 +74,9 @@
     (if (is-number? selection)
       (let [num (convert-to-num selection)]
         (case num 
-              1 (print-to-cli "Let's play a round!")
-              2 (print-to-cli "Let's play against AI!")))
-        (print-to-cli "That's not a number!"))))
+              1 (play-round (generate-empty-board) 
+                            (create-player "X")
+                            (create-player "O"))
+              2 (print-to-cli "Let's play against AI!"))
+              (print-to-cli "That's not a number!")))))
         
-  ; (play-round (generate-empty-board) "X"))
