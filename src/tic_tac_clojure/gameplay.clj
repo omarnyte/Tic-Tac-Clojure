@@ -53,6 +53,20 @@
           (recur (take-turn board current-player)
                  (switch-player current-player)))))
 
+ (defn valid-game-selection?
+  [str]
+  (and (is-number? str) 
+       (in-range? 1 2 (convert-to-num str))))
+                 
 (defn start-game
   []
-  (play-round (generate-empty-board) "X"))
+  (print-to-cli game-selection-prompt)
+  (let [selection (read-line)]
+    (if (is-number? selection)
+      (let [num (convert-to-num selection)]
+        (case num 
+              1 (print-to-cli "Let's play a round!")
+              2 (print-to-cli "Let's play against AI!")))
+        (print-to-cli "That's not a number!"))))
+        
+  ; (play-round (generate-empty-board) "X"))

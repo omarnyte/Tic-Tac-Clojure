@@ -32,3 +32,8 @@
               rendered-x-victory-board 
               "X wins!\n")
          (with-in-str "0" (with-out-str (play-round near-x-victory-board "X"))))))
+
+(deftest valid-game-selection-test
+  (is (= true (valid-game-selection? "1")))
+  (is (= true (valid-game-selection? "2")))
+  (is (= false (valid-game-selection? "5"))))
