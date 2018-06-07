@@ -12,8 +12,7 @@
   [board previous-player]
   (if (tie? board)
     (print-to-cli tied-game-message)
-    (print-to-cli (generate-winner-message 
-                  (get-player-mark previous-player)))))
+    (print-to-cli (generate-winner-message (get-player-mark previous-player)))))
 
 (defn valid-board-idx-selection?
   [board num]
@@ -24,7 +23,7 @@
   (let [selection (extract-numeric-input)]
     (if (valid-board-idx-selection? board selection)
         selection
-        (do (print-to-cli invalid-move-message)
+        (do (print-to-cli (generate-invalid-move-message selection))
             (recur board)))))
 
 (defn allow-human-move
