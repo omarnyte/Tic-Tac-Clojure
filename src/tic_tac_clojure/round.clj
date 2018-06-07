@@ -7,12 +7,6 @@
             [tic-tac-clojure.game-logic :refer :all]
             [tic-tac-clojure.message-render :refer :all]
             [tic-tac-clojure.player :refer :all]))
-
-(defn valid-selection?
-  [board str]
-  (and (is-number? str) 
-      (valid-move? board
-                   (convert-to-num str))))
         
 (defn handle-game-over
   [board previous-player]
@@ -20,23 +14,26 @@
     (print-to-cli tied-game-message)
     (print-to-cli (generate-winner-message 
                   (get-player-mark previous-player)))))
-  
-(defn switch-player
-  [current-player]
-  (if (= "X" current-player)
-      "O"
-      "X"))
+
+(defn valid-board-idx-selection?
+  [board num]
+  (valid-move? board num))
+
+(defn receive-board-idx-input 
+  [board]
+  (let [selection (extract-numeric-input)]
+    (if (valid-board-idx-selection? board selection)
+        selection
+        (do (print-to-cli invalid-move-message)
+            (recur board)))))
 
 (defn allow-human-move
   [board player]
   (print-to-cli (generate-move-selection-prompt (get-player-mark player)))
-  (let [selection (read-line)]
-    (if (valid-selection? board selection)
-        (mark-board board 
-                    (convert-to-num selection) 
-                    (get-player-mark player))
-        (do (print-to-cli invalid-move-message)
-            (recur board player)))))
+  (let [idx (receive-board-idx-input board)]
+    (mark-board board
+                idx
+                (get-player-mark player))))
 
 (defn allow-ai-move
   [board player]
@@ -47,10 +44,10 @@
                 (get-player-mark player))))
 
 (defn take-turn 
-  [board current-player]
-  (if (is-human? current-player)
-      (allow-human-move board current-player)
-      (allow-ai-move board current-player)))
+  [board player]
+  (if (is-human? player)
+      (allow-human-move board player)
+      (allow-ai-move board player)))
     
 (defn play-round
   [board curr-player opp-player]
