@@ -1,6 +1,11 @@
 (ns tic-tac-clojure.message-render
   (:gen-class))
-  
+
+(def game-selection-prompt
+  (str "Please type one of the options below to get started.
+       1 - Play against another human player
+       2 - Play against the computer"))
+
 (def selection-prompt
   (str "Please choose an index to mark your move: "))
 
