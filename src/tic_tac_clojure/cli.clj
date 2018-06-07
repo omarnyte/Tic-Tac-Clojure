@@ -13,6 +13,10 @@
           true
           (catch Exception e false))))
 
+(defn print-to-cli
+  [message]
+  (println (str message)))
+
 (defn extract-numeric-input
   []
   (let [input (read-line)]

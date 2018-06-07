@@ -2,9 +2,6 @@
   (:require [clojure.test :refer :all]
             [tic-tac-clojure.message-render :refer :all]))
 
-(deftest print-to-cli-test
-  (is (= "Hello, world!\n" (with-out-str (print-to-cli "Hello, world!")))))
-
 (deftest generate-winner-message-test
   (is (= "X wins!" (generate-winner-message "X")))
   (is (= "O wins!" (generate-winner-message "O"))))

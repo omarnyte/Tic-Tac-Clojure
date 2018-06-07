@@ -33,7 +33,3 @@
 (defn generate-ai-choice-message
   [idx]
   (str "The computer chose space #" idx ".\n"))
-        
-(defn print-to-cli
-  [message]
-  (println (str message)))
