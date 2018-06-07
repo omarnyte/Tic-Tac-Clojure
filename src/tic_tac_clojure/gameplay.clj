@@ -37,19 +37,27 @@
       "O"
       "X"))
 
+(defn allow-human-move
+  [board player]
+  (let [selection (read-line)]
+    (if (valid-selection? board selection)
+        (mark-board board 
+                    (convert-to-num selection) 
+                    (get-player-mark player))
+        (do (print-to-cli invalid-move-message)
+            (recur board player)))))
+
+(defn allow-ai-move
+  [board player]
+  (mark-board board 
+              (choose-random-empty-space board)
+              (get-player-mark player)))
+
 (defn take-turn 
   [board current-player]
   (if (is-human? current-player)
-      (let [selection (read-line)]
-        (if (valid-selection? board selection)
-            (mark-board board 
-                        (convert-to-num selection) 
-                        (get-player-mark current-player))
-            (do (print-to-cli invalid-move-message)
-                (recur board current-player))))
-      (mark-board board 
-                  (choose-random-empty-space board)
-                  (get-player-mark current-player))))
+      (allow-human-move board current-player)
+      (allow-ai-move board current-player)))
     
 (defn play-round
   [board curr-player opp-player]
@@ -64,33 +72,22 @@
 (defn valid-game-selection?
   [str]
   (and (is-number? str) 
-        (in-range? 1 2 (convert-to-num str))))
+       (in-range? 1 2 (convert-to-num str))))
                  
-(defn start-game
+(defn begin-selected-game
+  [num]
+  (case num 
+    1 (play-round (generate-empty-board) 
+                  (create-player "X" true)
+                  (create-player "O" true))
+    2 (play-round (generate-empty-board)
+                  (create-player "X" true)
+                  (create-player "O" false))))
+        
+(defn start-tic-tac-toe
   []
   (print-to-cli game-selection-prompt)
   (let [selection (read-line)]
     (if (is-number? selection)
       (let [num (convert-to-num selection)]
-        (case num 
-              1 (play-round (generate-empty-board) 
-                            (create-player "X" true)
-                            (create-player "O" true))
-              2 (play-round (generate-empty-board)
-                            (create-player "X" true)
-                            (create-player "O" false)))))))
-        
-
-; (defn take-turn 
-;   [board current-player]
-;   (if (is-human? current-player)
-;       (let [selection (read-line)]
-;         (if (valid-selection? board selection)
-;             (mark-board board 
-;                         (convert-to-num selection) 
-;                         (get-player-mark current-player)
-;             (do (print-to-cli invalid-move-message)
-;                 (take-turn board current-player)))))
-;       (mark-board board 
-;                   (choose-random-empty-space board)
-;                   (get-player-mark current-player))))
+        (begin-selected-game num)))))
