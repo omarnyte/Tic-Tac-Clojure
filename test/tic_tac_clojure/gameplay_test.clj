@@ -15,14 +15,7 @@
   {:mark "O" 
     :human? false})
 
-; (deftest convert-to-num-test
-;   (is (= 0 (convert-to-num "0"))))
-
-; (deftest is-number-test
-;   (is (= true (is-number? "0")))
-;   (is (= false (is-number? "a"))))
-            
 (deftest valid-game-selection-test
-  (is (= true (valid-game-selection? "1")))
-  (is (= true (valid-game-selection? "2")))
-  (is (= false (valid-game-selection? "5"))))
+  (is (= true (valid-game-selection? 1)))
+  (is (= true (valid-game-selection? 2)))
+  (is (= false (valid-game-selection? 3))))
