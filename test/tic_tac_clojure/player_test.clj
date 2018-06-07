@@ -1,16 +1,25 @@
 (ns tic-tac-clojure.player-test
   (:require [clojure.test :refer :all]
             [tic-tac-clojure.player :refer :all]))
-(def player-1
-  {:mark "X"})
+(def human-player
+  {:mark "X" 
+   :human? true})
 
-(def player-2
-  {:mark "O"})
+(def ai-player
+  {:mark "O" 
+   :human? false})
 
 (deftest create-player-test
-  (is (= player-1 (create-player "X")))
-  (is (= player-2 (create-player "O"))))
+  (is (= human-player (create-player "X" true)))
+  (is (= ai-player (create-player "O" false))))
 
 (deftest get-player-mark-test
-  (is (= "X" (get-player-mark player-1)))
-  (is (= "O" (get-player-mark player-2))))
+  (is (= "X" (get-player-mark human-player)))
+  (is (= "O" (get-player-mark ai-player))))
+
+(deftest is-human-test
+  (is (= true (is-human? human-player)))
+  (is (= false (is-human? ai-player))))
+
+(deftest switch-players-test
+  (is (= [ai-player human-player] (switch-players human-player ai-player))))
