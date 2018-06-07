@@ -20,9 +20,25 @@
 ;          (catch Exception e false))))
 
 (defn valid-game-selection?
-  [str]
-  (and (is-number? str) 
-       (in-range? 1 2 (convert-to-num str))))
+  [num]
+  (in-range? 1 2 num))
+  
+(defn extract-numeric-input
+  []
+  (let [input (read-line)]
+  (if (is-number? input)
+      (convert-to-num input)
+      (do (print-to-cli not-a-number-message)
+          (recur)))))     
+
+(defn receive-game-type-input
+  []
+  (let [selection (extract-numeric-input)]
+  (if (valid-game-selection? selection)
+      selection
+      (do (print-to-cli invalid-game-type-message)
+          (recur)))))
+      
                  
 (defn begin-selected-game
   [num]
@@ -37,7 +53,12 @@
 (defn start-tic-tac-toe
   []
   (print-to-cli game-selection-prompt)
-  (let [selection (read-line)]
-    (if (is-number? selection)
-      (let [num (convert-to-num selection)]
-        (begin-selected-game num)))))
+  (begin-selected-game (receive-game-type-input)))
+
+; (defn start-tic-tac-toe
+;   []
+;   (print-to-cli game-selection-prompt)
+;   (let [selection (read-line)]
+;     (if (is-number? selection)
+;       (let [num (convert-to-num selection)]
+;         (begin-selected-game num)))))
