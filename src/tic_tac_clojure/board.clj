@@ -18,7 +18,11 @@
   [board pos]
   (= nil (get-space board pos)))
 
+(defn empty-space-indices
+  [board]
+  (keep-indexed #(if (nil? %2) %1) board))
+  
 (defn mark-board
   [board pos mark]
   (assoc board pos mark))
-
+  

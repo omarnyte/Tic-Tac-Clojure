@@ -20,6 +20,11 @@
   (is (= true (empty-space? empty-board 0)))
   (is (= false (empty-space? one-mark-board 0))))
             
+(deftest empty-space-indices-test
+  (is (= [0 1 2 3 4 5 6 7 8] (empty-space-indices empty-board)))
+  (is (= [1 2 3 4 5 6 7 8] (empty-space-indices one-mark-board)))
+  (is (= [0 3 6 7] (empty-space-indices near-x-victory-board))))
+  
 (deftest mark-board-test
   (is (= one-mark-board (mark-board empty-board 0 "X"))))
 
