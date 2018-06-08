@@ -28,18 +28,17 @@
 
 (defn allow-human-move
   [board player]
-  (print-to-cli (generate-move-selection-prompt (get-player-mark player)))
-  (let [idx (receive-board-idx-input board)]
-    (mark-board board
-                idx
-                (get-player-mark player))))
+  (let [mark (get-player-mark player)]
+    (print-to-cli (generate-move-selection-prompt mark))
+    (let [idx (receive-board-idx-input board)]
+      (mark-board board idx mark))))
 
 (defn allow-ai-move
   [board player]
-  (let [rand-idx (choose-random-empty-space board)]
-    (print-to-cli (print-to-cli (generate-ai-choice-message rand-idx)))
+  (let [idx (choose-best-space board)]
+    (print-to-cli (generate-ai-choice-message idx))
     (mark-board board 
-                rand-idx
+                idx
                 (get-player-mark player))))
 
 (defn take-turn 
