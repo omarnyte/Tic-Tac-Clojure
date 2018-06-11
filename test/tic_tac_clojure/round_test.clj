@@ -25,4 +25,4 @@
               "X wins!\n")
          (with-in-str "0" (with-out-str (play-round near-x-victory-board 
                                                     human-x-player 
-                                                    human-o-player)))))))
+                                                    human-o-player))))))

@@ -9,8 +9,6 @@
 
 (defn valid-game-selection?
   [num]
-  ; in-range is currently in game-logic namespace
-  ; TODO: find better location / remove game-logic dependency  
   (in-range? 1 2 num))
   
 (defn receive-game-type-input
@@ -24,12 +22,12 @@
 (defn begin-selected-game
   [num]
   (case num 
-    1 (play-round (generate-empty-board) 
-                  (create-player "X" true)
-                  (create-player "O" true))
-    2 (play-round (generate-empty-board)
-                  (create-player "X" true)
-                  (create-player "O" false))))
+        1 (play-round (generate-empty-board) 
+                      (create-proto-player "X" true)
+                      (create-proto-player "O" true))
+        2 (play-round (generate-empty-board)
+                      (create-proto-player "X" true)
+                      (create-proto-player "O" false))))
         
 (defn start-tic-tac-toe
   []
