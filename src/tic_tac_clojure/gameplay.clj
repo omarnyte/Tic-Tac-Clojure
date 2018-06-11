@@ -5,16 +5,13 @@
             [tic-tac-clojure.game-logic :refer :all]
             [tic-tac-clojure.message-render :refer :all]
             [tic-tac-clojure.player :refer :all]
-            [tic-tac-clojure.round :refer :all]))
+            [tic-tac-clojure.round :refer :all]
+            [tic-tac-clojure.validators :refer :all]))
 
-(defn valid-game-selection?
-  [num]
-  (in-range? 1 2 num))
-  
 (defn receive-game-type-input
   []
   (let [selection (extract-numeric-input)]
-  (if (valid-game-selection? selection)
+  (if (valid-numeric-selection? 1 2 selection)
       selection
       (do (print-to-cli invalid-game-type-message)
           (recur)))))     

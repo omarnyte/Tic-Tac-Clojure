@@ -1,6 +1,7 @@
 (ns tic-tac-clojure.game-logic
-  (:require [tic-tac-clojure.board :refer :all])
-  (:gen-class))
+  (:gen-class)
+  (:require [tic-tac-clojure.board :refer :all]
+            [tic-tac-clojure.validators :refer :all]))
 
 (def winning-indices
   [[0 1 2]
@@ -11,10 +12,6 @@
   [2 5 8]
   [0 4 8]
   [2 4 6]])
-
-(defn in-range?
-  [start end val]
-  (and (>= val start) (<= val end)))
 
 (defn valid-move?
   [board num]
