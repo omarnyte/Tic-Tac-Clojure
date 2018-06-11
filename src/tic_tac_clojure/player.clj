@@ -42,17 +42,14 @@
                 (get-player-mark player))))
   
 (defprotocol Player
-  (get-player-mark [this])
   (take-turn [this board]))
 
 (defrecord Human [mark human?]
   Player
-  (get-player-mark [this] (:mark this))
   (take-turn [this board] (allow-human-move board (:mark this))))
 
 (defrecord AI [mark human?]
   Player
-  (get-player-mark [this] (:mark this))
   (take-turn [this board] (allow-ai-move board this)))
 
 (defn create-proto-player
