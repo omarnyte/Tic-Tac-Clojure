@@ -2,7 +2,6 @@
   (:gen-class)
   (:require [tic-tac-clojure.board :refer :all]
             [tic-tac-clojure.cli :refer :all]
-            [tic-tac-clojure.game-logic :refer :all]
             [tic-tac-clojure.message-render :refer :all]
             [tic-tac-clojure.player :refer :all]
             [tic-tac-clojure.round :refer :all]
