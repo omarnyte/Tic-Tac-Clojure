@@ -10,37 +10,47 @@
   (if (= "X" marker) "O" "X"))
 
 (defn evaluate-result
-  [board ai-marker]
+  [board marker score]
   (let [winner (winner? board)]
     (cond
-      (= winner ai-marker) 100 
+      (= winner marker) 1 
       (nil? winner) 0
-      :else -100)))
+      :else (* -1 score))))
       
 (defn score-move 
   [board marker score]
   (if (game-over? board)
-      (evaluate-result board marker)
-      (let [opp-marker (get-opp-marker marker)
-            sim-board (mark-board board (choose-best-space board opp-marker) opp-marker)]
-        (recur sim-board 
+      (evaluate-result board marker score)
+      (let [opp-marker (get-opp-marker marker)]
+        (recur (mark-board board 
+                           (choose-best-space board opp-marker) opp-marker)
                opp-marker 
-               (* -100 score)))))
+               (* -1 score)))))
+
+(def score-move (memoize score-move))
             
 (defn create-idx-scores-map 
   [board empty-indices marker]
   (zipmap empty-indices 
           (map #(score-move (mark-board board % marker) 
                             marker 
-                            100)
+                            1)
                 empty-indices)))
 
 (defn pick-max-score-idx
   [idx-scores-map]
   (key (first (sort-by val > idx-scores-map))))
-
+    
 (defn choose-best-space 
   [board marker]
-  (let [avail-indices (empty-space-indices board)
-        idx-scores-map (create-idx-scores-map board avail-indices marker)]
-    (pick-max-score-idx idx-scores-map)))
+  (pick-max-score-idx (create-idx-scores-map board 
+                                             (empty-space-indices board)marker)))
+
+
+
+; (defn best-move [board player]
+; (let [moves (empty-spaces board)
+;       scores (zipmap moves (map #(score-move (fill-space board % player) player win) moves))
+;       best-score (reduce max (vals scores))
+;       best-moves (filter #(= (scores %) best-score) moves)]
+;   (first best-moves)))
