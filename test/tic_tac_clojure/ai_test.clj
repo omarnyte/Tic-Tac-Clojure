@@ -18,8 +18,8 @@
   (is (= 0 (evaluate-result tied-board "O")))
   (is (= 100 (evaluate-result o-victory-board "O"))))
             
-; (deftest pick-max-score-index-test
-;   (is (= 3 (pick-max-score-index sample-scores-map))))
+(deftest pick-max-score-idx-test
+  (is (= 7 (pick-max-score-idx sample-scores-map))))
             
 ; (deftest choose-best-space-test
 ;   (is (= 7 (choose-best-space minimax-board-2)))

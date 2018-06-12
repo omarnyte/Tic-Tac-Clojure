@@ -17,3 +17,8 @@
       (nil? winner) 0
       :else -100)))
     
+(defn pick-max-score-idx
+  [scores-map]
+  (key (first (sort-by val > scores-map))))
+      
+;
