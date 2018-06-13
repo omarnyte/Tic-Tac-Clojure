@@ -14,11 +14,11 @@
   [board marker score]
   (let [winner (winner? board)]
     (cond
-      (= winner marker) 1 
+      (= winner marker) score
       (nil? winner) 0
       :else (* -1 score))))
       
-(defn simulate-move
+(defn simulate-next-move
   [board marker score]
   (let [opp-marker (get-opp-marker marker)]
     (score-move (mark-board board 
@@ -31,7 +31,7 @@
   [board marker score]
   (if (game-over? board)
       (evaluate-result board marker score)
-      (simulate-move board marker score)))
+      (simulate-next-move board marker score)))
 
 (def score-move (memoize score-move))
             
