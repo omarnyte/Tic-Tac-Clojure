@@ -1,36 +1,18 @@
-# tic-tac-clojure
+# Tic Tac Clojure
 
-FIXME: description
-
-## Installation
-
-Download from http://example.com/FIXME.
+This version of Tic Tac Toe is written in Clojure. Players can choose to play human vs. human or human vs. [unbeatable] computer. 
 
 ## Usage
 
-FIXME: explanation
+Please download or clone the repo, and be sure to have [Leiningen](https://leiningen.org) installed.
 
-    $ java -jar tic-tac-clojure-0.1.0-standalone.jar [args]
+### Playing
 
-## Options
+Navigate to the root directory and run: 
 
-FIXME: listing of options this app accepts.
+    lein run
 
-## Examples
+### Testing
+Navigate to the root directory and run:
 
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
-
-## License
-
-Copyright © 2018 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+    lein test
