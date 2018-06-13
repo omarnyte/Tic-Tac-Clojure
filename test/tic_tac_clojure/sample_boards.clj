@@ -32,19 +32,14 @@
    nil nil "X"])
 
 (def minimax-board-1
-  ["X" nil "X"
-   nil nil "O"
+  ["X" nil "O"
+   "X" nil nil
    "O" nil "X"])
     
 (def minimax-board-2
-  ["X" "X" nil
-   nil nil "X"
-   "O" nil "O"])
-
-(def minimax-board-3
-  ["X" nil nil
-   nil "O" nil
-   nil nil "X"])
+  [nil "O" "X"
+   nil "X" "O"
+   nil "X" nil])
     
 (def divided-empty-board
   [[nil nil nil] 
