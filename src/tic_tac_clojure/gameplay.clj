@@ -4,17 +4,8 @@
             [tic-tac-clojure.cli :refer :all]
             [tic-tac-clojure.message-render :refer :all]
             [tic-tac-clojure.player :refer :all]
-            [tic-tac-clojure.round :refer :all]
-            [tic-tac-clojure.validators :refer :all]))
+            [tic-tac-clojure.round :refer :all]))
 
-(defn receive-game-type-input
-  []
-  (let [selection (extract-numeric-input)]
-  (if (valid-numeric-selection? 1 2 selection)
-      selection
-      (do (print-to-cli invalid-game-type-message)
-          (recur)))))     
-                 
 (defn begin-selected-game
   [num]
   (case num 
@@ -28,4 +19,8 @@
 (defn start-tic-tac-toe
   []
   (print-to-cli game-selection-prompt)
-  (begin-selected-game (receive-game-type-input)))
+  (begin-selected-game (get-valid-num-input 1 2))
+  (print-to-cli play-again-prompt)
+  (case (get-valid-num-input 0 1)
+    0 (print-to-cli thank-you-message)
+    1 (recur)))
