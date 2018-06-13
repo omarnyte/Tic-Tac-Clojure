@@ -1,4 +1,4 @@
-(ns tic-tac-clojure.gameplay-test
+(ns tic-tac-clojure.message-render-test
   (:require [clojure.test :refer :all]
             [tic-tac-clojure.message-render :refer :all]))
 
