@@ -35,7 +35,7 @@
         (first marks)
         nil)))
 
-(defn- winner? 
+(defn winner? 
   ([board] 
     (winner? board winning-indices))
   ([board remaining-indices]
