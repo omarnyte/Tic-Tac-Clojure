@@ -4,8 +4,7 @@
             [tic-tac-clojure.board :refer :all]
             [tic-tac-clojure.cli :refer :all]
             [tic-tac-clojure.game-logic :refer :all]
-            [tic-tac-clojure.message-render :refer :all]
-            [tic-tac-clojure.cli :refer :all]))
+            [tic-tac-clojure.message-render :refer :all]))
 
 (defn get-player-mark
   [player]
@@ -15,14 +14,11 @@
   [player]
   (:human? player))
 
-(defn valid-board-idx-selection?
-  [board num]
-  (valid-move? board num))
-
 (defn receive-board-idx-input 
   [board]
-  (let [selection (extract-numeric-input)]
-    (if (valid-board-idx-selection? board selection)
+  (let [selection (get-valid-num-input 0 
+                                       (- (count board) 1))]
+    (if (valid-move? board selection)
         selection
         (do (print-to-cli (generate-invalid-move-message selection))
             (recur board)))))
@@ -32,14 +28,6 @@
     (print-to-cli (generate-move-selection-prompt mark))
     (let [idx (receive-board-idx-input board)]
       (mark-board board idx mark)))
-
-(defn allow-ai-move
-  [board player]
-  (let [idx (choose-best-space board)]
-    (print-to-cli (generate-ai-choice-message idx))
-    (mark-board board 
-                idx
-                (get-player-mark player))))
   
 (defprotocol Player
   (take-turn [this board]))
@@ -50,7 +38,12 @@
 
 (defrecord AI [mark human?]
   Player
-  (take-turn [this board] (allow-ai-move board this)))
+  (take-turn [this board] 
+    (let [idx (choose-best-space board (:mark this))]
+      (print-to-cli (generate-ai-choice-message idx))
+      (mark-board board 
+                  idx
+                  (:mark this)))))
 
 (defn create-proto-player
   [mark human?]
