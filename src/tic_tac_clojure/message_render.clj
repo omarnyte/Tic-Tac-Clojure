@@ -6,6 +6,9 @@
        1 - Play against another human player
        2 - Play against the computer"))
 
+(def play-again-prompt
+  (str "Would you like to play again? Enter 0 for no and 1 for yes: "))
+
 (def board-idx-selection-prompt
   (str "Please choose an index to mark your move: "))
 
@@ -17,6 +20,9 @@
   
 (def tied-game-message
   (str "It's a tie!"))
+
+(def thank-you-message
+  (str "Thank you for playing!"))
   
 (defn generate-winner-message
   [winner]
@@ -25,6 +31,10 @@
 (defn generate-move-selection-prompt
   [current-player]
   (str "It's your turn, " current-player ".\n" board-idx-selection-prompt))
+
+(defn generate-invalid-range-message
+  [min max]
+  (str "Please choose a number between " min " and " max "."))
 
 (defn generate-invalid-move-message
   [num]
