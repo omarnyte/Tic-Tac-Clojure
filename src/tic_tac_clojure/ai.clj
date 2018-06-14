@@ -21,27 +21,31 @@
 (defn simulate-next-move
   [board marker score]
   (let [opp-marker (get-opp-marker marker)]
-    (score-move (mark-board board 
-                            (choose-best-space board opp-marker) 
-                            opp-marker)
-                opp-marker 
-                (* -1 score))))
+    (mark-board board 
+                (choose-best-space board opp-marker) 
+                opp-marker)))
       
 (defn score-move 
   [board marker score]
   (if (game-over? board)
       (evaluate-result board marker score)
-      (simulate-next-move board marker score)))
+      (recur (simulate-next-move board marker score)
+             (get-opp-marker marker)
+             (* -1 score))))
 
 (def score-move (memoize score-move))
+
+(defn score-moves
+  [board empty-indices marker]
+  (map #(score-move (mark-board board % marker) 
+                    marker 
+                    1)
+       empty-indices))
             
 (defn create-idx-scores-map 
   [board empty-indices marker]
   (zipmap empty-indices 
-          (map #(score-move (mark-board board % marker) 
-                            marker 
-                            1)
-                empty-indices)))
+          (score-moves board empty-indices marker)))
 
 (defn pick-max-score-idx
   [idx-scores-map]
@@ -50,4 +54,5 @@
 (defn choose-best-space 
   [board marker]
   (pick-max-score-idx (create-idx-scores-map board 
-                                             (empty-space-indices board)marker)))
+                                             (empty-space-indices board)
+                                             marker)))
