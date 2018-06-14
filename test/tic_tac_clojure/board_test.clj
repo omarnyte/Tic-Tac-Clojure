@@ -41,12 +41,6 @@
           ["X" "O" "O"] 
           ["O" "X" "X"]] (get-cols tied-board))))
 
-(deftest get-TL-to-BR-diag-test 
-  (is (= ["X" "O" "X"] (get-TL-to-BR-diag tied-board))))
-
-(deftest get-TR-to-BL-diag-test 
-  (is (= ["O" "O" "X"] (get-TR-to-BL-diag tied-board))))
-
 (deftest get-diags-test 
   (is (= [["X" "O" "X"] 
           ["O" "O" "X"]] (get-diags tied-board))))

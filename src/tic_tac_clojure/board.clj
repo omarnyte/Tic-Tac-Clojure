@@ -44,14 +44,14 @@
   [board]
   (apply map vector (get-rows board)))
 
-(defn get-TL-to-BR-diag
+(defn- get-TL-to-BR-diag
   [board]
   (get-spaces board
               (range 0 
                      (board-length board)
-                     (board-size board))))
+                     (+ (board-size board) 1))))
 
-(defn get-TR-to-BL-diag
+(defn- get-TR-to-BL-diag
   [board]
   (let [size-minus-1 (- (board-size board) 1)]
   (get-spaces board

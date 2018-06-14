@@ -3,16 +3,6 @@
   (:require [tic-tac-clojure.board :refer :all]
             [tic-tac-clojure.validators :refer :all]))
 
-(def winning-indices
-  [[0 1 2]
-  [3 4 5]
-  [6 7 8]
-  [0 3 6]
-  [1 4 7]
-  [2 5 8]
-  [0 4 8]
-  [2 4 6]])
-
 (defn valid-move?
   [board num]
   (and  (in-range? 0 
@@ -29,23 +19,21 @@
   (let [first-mark (first marks)]
     (every? #(= first-mark %) marks)))
 
-(defn- winner-from-indices
-  [board indices]
-  (let [marks (get-spaces board indices)]
-    (if (and (no-nil-marks? marks)
-             (identical-marks? marks))
-        (first marks)
-        nil)))
-
+(defn- get-winning-combos
+  [board]
+  (concat (get-rows board)
+          (get-cols board)
+          (get-diags board)))
+        
 (defn winner? 
   ([board] 
-    (winner? board winning-indices))
-  ([board remaining-indices]
-    (if (empty? remaining-indices)
+    (winner? board (get-winning-combos board)))
+  ([board winning-combos]
+    (if (empty? winning-combos)
       nil 
-      (if (winner-from-indices board (first remaining-indices))
-        (winner-from-indices board (first remaining-indices))    
-        (recur board (rest remaining-indices))))))
+      (if (identical-marks? (first winning-combos))
+          (first (first winning-combos))    
+          (recur board (rest winning-combos))))))
 
 (defn tie?
   [board]
