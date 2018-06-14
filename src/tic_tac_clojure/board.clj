@@ -1,5 +1,6 @@
 (ns tic-tac-clojure.board
-  (:gen-class))
+  (:gen-class)
+  (:require [clojure.math.numeric-tower :as math]))
 
 (defn generate-empty-board
   []
@@ -8,6 +9,10 @@
 (defn board-length
   [board]
   (count board))
+
+(defn board-size
+  [board]
+  (math/sqrt (count board)))
 
 (defn get-space
   [board pos]
@@ -30,3 +35,31 @@
   [board pos mark]
   (assoc board pos mark))
   
+(defn get-rows
+  [board]
+  (partition (math/sqrt (board-length board)) 
+             board))
+
+(defn get-cols
+  [board]
+  (apply map vector (get-rows board)))
+
+(defn get-TL-to-BR-diag
+  [board]
+  (get-spaces board
+              (range 0 
+                     (board-length board)
+                     (board-size board))))
+
+(defn get-TR-to-BL-diag
+  [board]
+  (let [size-minus-1 (- (board-size board) 1)]
+  (get-spaces board
+              (range size-minus-1
+                     (- (board-length board) 1)
+                     size-minus-1))))
+
+(defn get-diags 
+  [board]
+  (vector (get-TL-to-BR-diag board)
+          (get-TR-to-BL-diag board)))

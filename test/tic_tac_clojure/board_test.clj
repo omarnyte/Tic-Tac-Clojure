@@ -31,3 +31,22 @@
 (deftest mark-board-test
   (is (= one-mark-board (mark-board empty-board 0 "X"))))
 
+(deftest get-rows-test
+  (is (= [["X" "X" "O"]
+          ["O" "O" "X"] 
+          ["X" "O" "X"]] (get-rows tied-board))))
+
+(deftest get-rows-test
+  (is (= [["X" "O" "X"]
+          ["X" "O" "O"] 
+          ["O" "X" "X"]] (get-cols tied-board))))
+
+(deftest get-TL-to-BR-diag-test 
+  (is (= ["X" "O" "X"] (get-TL-to-BR-diag tied-board))))
+
+(deftest get-TR-to-BL-diag-test 
+  (is (= ["O" "O" "X"] (get-TR-to-BL-diag tied-board))))
+
+(deftest get-diags-test 
+  (is (= [["X" "O" "X"] 
+          ["O" "O" "X"]] (get-diags tied-board))))
