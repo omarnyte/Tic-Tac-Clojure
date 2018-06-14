@@ -6,6 +6,9 @@
 (deftest generate-empty-board-test
   (is (= empty-board (generate-empty-board))))
 
+(deftest board-length-test 
+  (is (= 9 (board-length empty-board))))
+
 (deftest get-space-test
   (is (= "X" (get-space one-mark-board 0)))
   (is (= nil (get-space one-mark-board 1))))

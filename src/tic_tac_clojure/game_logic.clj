@@ -15,7 +15,9 @@
 
 (defn valid-move?
   [board num]
-  (and  (in-range? 0 8 num)
+  (and  (in-range? 0 
+                  (- (board-length board) 1) 
+                  num)
         (empty-space? board num)))
 
 (defn- no-nil-marks?

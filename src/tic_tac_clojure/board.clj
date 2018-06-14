@@ -5,6 +5,10 @@
   []
   (vec (repeat 9 nil)))
 
+(defn board-length
+  [board]
+  (count board))
+
 (defn get-space
   [board pos]
   (nth board pos))
