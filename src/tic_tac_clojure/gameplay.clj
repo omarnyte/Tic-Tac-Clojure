@@ -6,15 +6,15 @@
             [tic-tac-clojure.player :refer :all]
             [tic-tac-clojure.round :refer :all]))
 
-(defn begin-selected-game
+(defn- begin-selected-game
   [num]
   (case num 
         1 (play-round (generate-empty-board) 
-                      (create-proto-player "X" true)
-                      (create-proto-player "O" true))
+                      (create-proto-player "X" "human")
+                      (create-proto-player "O" "human"))
         2 (play-round (generate-empty-board)
-                      (create-proto-player "X" true)
-                      (create-proto-player "O" false))))
+                      (create-proto-player "X" "human")
+                      (create-proto-player "O" "ai"))))
         
 (defn start-tic-tac-toe
   []

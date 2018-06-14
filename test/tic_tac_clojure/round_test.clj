@@ -5,10 +5,10 @@
             [tic-tac-clojure.sample-boards :refer :all]))
             
 (def human-x-player
-  (->Human "X" true))
+  (->Human "X"))
 
 (def human-o-player
-  (->Human "O" true))
+  (->Human "O"))
             
 (deftest play-round-test
   (is (= (str rendered-x-victory-board "X wins!\n") 
