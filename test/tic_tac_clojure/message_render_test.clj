@@ -7,5 +7,5 @@
   (is (= "O wins!" (generate-winner-message "O"))))
 
 (deftest generate-move-selection-prompt-test
-  (is (= "It's your turn, X." (generate-move-selection-prompt "X")))
-  (is (= "It's your turn, O." (generate-move-selection-prompt "O"))))
+  (is (= "It's your turn, X.\nPlease choose an index to mark your move: " (generate-move-selection-prompt "X")))
+  (is (= "It's your turn, O.\nPlease choose an index to mark your move: " (generate-move-selection-prompt "O"))))
