@@ -10,10 +10,6 @@
   [player]
   (:mark player))
 
-(defn is-human?
-  [player]
-  (:human? player))
-
 (defn receive-board-idx-input 
   [board]
   (let [selection (get-valid-num-input 0 

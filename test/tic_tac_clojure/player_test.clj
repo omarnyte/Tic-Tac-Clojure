@@ -12,7 +12,4 @@
 (deftest get-player-mark-test
   (is (= "X" (get-player-mark human-player)))
   (is (= "O" (get-player-mark ai-player))))
-
-(deftest is-human-test
-  (is (= true (is-human? human-player)))
-  (is (= false (is-human? ai-player))))
+  
