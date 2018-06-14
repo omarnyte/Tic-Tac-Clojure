@@ -1,14 +1,12 @@
 (ns tic-tac-clojure.round
   (:gen-class)
-  (:require [tic-tac-clojure.ai :refer :all]
-            [tic-tac-clojure.board :refer :all]
-            [tic-tac-clojure.board-render :refer :all]
+  (:require [tic-tac-clojure.board-render :refer :all]
             [tic-tac-clojure.cli :refer :all]
             [tic-tac-clojure.game-logic :refer :all]
             [tic-tac-clojure.message-render :refer :all]
             [tic-tac-clojure.player :refer :all]))
         
-(defn handle-game-over
+(defn- handle-game-over
   [board previous-player]
   (if (tie? board)
     (print-to-cli tied-game-message)
