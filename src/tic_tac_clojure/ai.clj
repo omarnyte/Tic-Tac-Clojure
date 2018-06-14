@@ -3,6 +3,10 @@
   (:require [tic-tac-clojure.board :as board]
             [tic-tac-clojure.game-logic :as game-logic]))
 
+(def loss -1)
+(def tie 0)
+(def win 1)
+            
 (declare choose-best-space)
 (declare score-move)
             
@@ -15,8 +19,8 @@
   (let [winner (game-logic/winner? board)]
     (cond
       (= winner marker) score
-      (nil? winner) 0
-      :else (* -1 score))))
+      (nil? winner) tie
+      :else (* loss score))))
       
 (defn simulate-next-move
   [board marker score]
@@ -31,7 +35,7 @@
       (evaluate-result board marker score)
       (recur (simulate-next-move board marker score)
              (get-opp-marker marker)
-             (* -1 score))))
+             (* loss score))))
 
 (def score-move (memoize score-move))
 
@@ -39,7 +43,7 @@
   [board empty-indices marker]
   (map #(score-move (board/mark-board board % marker) 
                     marker 
-                    1)
+                    win)
        empty-indices))
             
 (defn create-idx-scores-map 
