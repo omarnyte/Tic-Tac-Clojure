@@ -5,10 +5,9 @@
 
 (defn valid-move?
   [board num]
-  (and  (in-range? 0 
-                  (- (board-length board) 1) 
-                  num)
-        (empty-space? board num)))
+  (let [last-idx (- (board-length board) 1)]
+  (and  (in-range? 0 last-idx num)
+        (empty-space? board num))))
 
 (defn- no-nil-marks?
   [marks]

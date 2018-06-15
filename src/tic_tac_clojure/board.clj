@@ -46,18 +46,20 @@
 
 (defn- get-TL-to-BR-diag
   [board]
-  (let [starting-idx 0]
+  (let [starting-idx 0
+        size-plus-1 (+ (board-size board) 1)]
     (get-spaces board
                 (range starting-idx
                        (board-length board)
-                       (+ (board-size board) 1)))))
+                       size-plus-1))))
 
 (defn- get-TR-to-BL-diag
   [board]
-  (let [size-minus-1 (- (board-size board) 1)]
+  (let [size-minus-1 (- (board-size board) 1)
+        length-minus-1 (- (board-length board) 1)]
   (get-spaces board
               (range size-minus-1
-                     (- (board-length board) 1)
+                     length-minus-1
                      size-minus-1))))
 
 (defn get-diags 
