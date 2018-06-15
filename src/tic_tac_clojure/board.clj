@@ -1,10 +1,10 @@
 (ns tic-tac-clojure.board
   (:gen-class)
   (:require [clojure.math.numeric-tower :as math]))
-
+  
 (defn generate-empty-board
-  []
-  (vec (repeat 9 nil)))
+  [board-length]
+  (vec (repeat board-length nil)))
 
 (defn board-length
   [board]
@@ -46,10 +46,11 @@
 
 (defn- get-TL-to-BR-diag
   [board]
-  (get-spaces board
-              (range 0 
-                     (board-length board)
-                     (+ (board-size board) 1))))
+  (let [starting-idx 0]
+    (get-spaces board
+                (range starting-idx
+                       (board-length board)
+                       (+ (board-size board) 1)))))
 
 (defn- get-TR-to-BL-diag
   [board]

@@ -4,7 +4,7 @@
             [tic-tac-clojure.board :refer :all]))
 
 (deftest generate-empty-board-test
-  (is (= empty-board (generate-empty-board))))
+  (is (= empty-board (generate-empty-board 9))))
 
 (deftest board-length-test 
   (is (= 9 (board-length empty-board))))

@@ -6,13 +6,15 @@
             [tic-tac-clojure.player :refer :all]
             [tic-tac-clojure.round :refer :all]))
 
+(def standard-board-length 9)
+            
 (defn- begin-selected-game
   [num]
   (case num 
-        1 (play-round (generate-empty-board) 
+        1 (play-round (generate-empty-board standard-board-length) 
                       (create-proto-player "X" "human")
                       (create-proto-player "O" "human"))
-        2 (play-round (generate-empty-board)
+        2 (play-round (generate-empty-board standard-board-length)
                       (create-proto-player "X" "human")
                       (create-proto-player "O" "ai"))))
         
