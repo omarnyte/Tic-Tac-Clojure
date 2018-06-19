@@ -12,8 +12,9 @@
 
 (defn- receive-board-idx-input 
   [board]
-  (let [selection (get-valid-num-input 0 
-                                       (- (count board) 1))]
+  (let [starting-idx 0 
+        ending-idx (- (count board) 1)
+        selection (get-valid-num-input starting-idx ending-idx)]
     (if (valid-move? board selection)
         selection
         (do (print-to-cli (generate-invalid-move-message selection))
