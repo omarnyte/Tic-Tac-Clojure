@@ -9,7 +9,8 @@
 (def standard-board-length 9)
 
 (def players { 1 [{:marker "X" :type "human"} {:marker "O" :type "human"}]
-               2 [{:marker "X" :type "human"} {:marker "O" :type "ai"}] })
+               2 [{:marker "X" :type "human"} {:marker "O" :type "ai"}] 
+               3 [{:marker "X" :type "ai"} {:marker "O" :type "ai"}] })
             
 (defn- begin-selected-game
   [num]

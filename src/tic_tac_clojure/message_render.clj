@@ -4,7 +4,8 @@
 (def game-selection-prompt
   (str "Please type one of the options below to get started.
        1 - Play against another human player
-       2 - Play against the computer"))
+       2 - Play against the computer
+       3 - Watch a computer play against itself"))
 
 (def play-again-prompt
   (str "Would you like to play again? Enter 0 for no and 1 for yes: "))
