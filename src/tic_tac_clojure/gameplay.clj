@@ -15,9 +15,9 @@
   [num]
   (let [player-1 (first (get players num))
         player-2 (last (get players num))]
-  (play-round (generate-empty-board standard-board-length) 
-              (create-proto-player (:marker player-1) (:type player-1))
-              (create-proto-player (:marker player-2) (:type player-2)))))
+  (print-to-cli (play-round (generate-empty-board standard-board-length) 
+                (create-proto-player (:marker player-1) (:type player-1))
+                (create-proto-player (:marker player-2) (:type player-2))))))
 
 (declare start-tic-tac-toe)
             
