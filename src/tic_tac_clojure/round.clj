@@ -9,8 +9,8 @@
 (defn- handle-game-over
   [board previous-player]
   (if (tie? board)
-    (print-to-cli tied-game-message)
-    (print-to-cli (generate-winner-message (get-player-mark previous-player)))))
+    tied-game-message
+    (generate-winner-message (get-player-mark previous-player))))
     
 (defn play-round
   [board curr-player opp-player]
