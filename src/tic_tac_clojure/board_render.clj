@@ -2,6 +2,7 @@
   (:gen-class)
   (:require [clojure.math.numeric-tower :as math]
             [clojure.string :as string]
+            [tic-tac-clojure.cli :refer :all]
             [tic-tac-clojure.message-render :refer :all]))
 
 (def horizontal-divider

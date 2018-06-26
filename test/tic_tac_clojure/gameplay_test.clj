@@ -1,37 +1,27 @@
 (ns tic-tac-clojure.gameplay-test
-  (:require [clojure.test :refer :all]
+  (:require [clojure.string :as string]
+            [clojure.test :refer :all]
             [tic-tac-clojure.gameplay :refer :all]
             [tic-tac-clojure.sample-boards :refer :all]))
 
-(deftest convert-to-num-test
-  (is (= 0 (convert-to-num "0"))))
-
-(deftest is-number-test
-  (is (= true (is-number? "0")))
-  (is (= false (is-number? "a"))))
-            
-(deftest in-range-test
-  (is (= true (in-range? 0 8 0)))
-  (is (= true (in-range? 0 8 4)))
-  (is (= true (in-range? 0 8 8)))
-  (is (= false (in-range? 0 8 9))))
-
-(deftest valid-move-test
-  (is (= true (valid-move? empty-board 0)))
-  (is (= false (valid-move? one-mark-board 0)))
-  (is (= false (valid-move? one-mark-board 9))))
-
-(deftest valid-selection-test
-  (is (= true (valid-selection? empty-board "0")))
-  (is (= false (valid-selection? one-mark-board "0")))
-  (is (= false (valid-selection? one-mark-board "9")))
-  (is (= false (valid-selection? one-mark-board "a"))))
-
-(deftest switch-player-test
-  (is (= "X" (switch-player "O")))
-  (is (= "O" (switch-player "X"))))
-  
-(deftest play-round-test
-  (is (= "X wins!\n" (with-out-str (play-round x-victory-board "O"))))
-  (is (= "O wins!\n" (with-out-str (play-round o-victory-board "X"))))
-  (is (= "It's a tied game!\n" (with-out-str (play-round tied-board "X")))))
+(def human-v-human-str "1\n")
+(def x-win-str "0\n1\n4\n2\n8\n")
+(def o-win-str "4\n0\n6\n1\n8\n2\n")
+(def exit-str "0\n")
+(def restart-str "1\n")
+           
+(deftest start-tic-tac-toe-test 
+  (testing "Game exits with 'Thank you for playing!' if the user chooses to exit"
+    (is (string/includes? (with-out-str (with-in-str (str human-v-human-str 
+                                                          x-win-str
+                                                          exit-str) 
+                                                     (start-tic-tac-toe)))
+                          "Thank you for playing!")))
+    (is (string/includes? (with-out-str (with-in-str (str human-v-human-str 
+                                                          x-win-str
+                                                          restart-str
+                                                          human-v-human-str
+                                                          o-win-str
+                                                          exit-str) 
+                                                     (start-tic-tac-toe)))
+                          "O wins!")))

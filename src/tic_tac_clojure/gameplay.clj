@@ -1,67 +1,39 @@
 (ns tic-tac-clojure.gameplay
   (:gen-class)
-  (:require [tic-tac-clojure.board :refer :all])
-  (:require [tic-tac-clojure.board-render :refer :all])
-  (:require [tic-tac-clojure.game-logic :refer :all])
-  (:require [tic-tac-clojure.message-render :refer :all]))
+  (:require [tic-tac-clojure.board :refer :all]
+            [tic-tac-clojure.cli :refer :all]
+            [tic-tac-clojure.message-render :refer :all]
+            [tic-tac-clojure.player :refer :all]
+            [tic-tac-clojure.round :refer :all]))
 
-(defn convert-to-num
-  [str]
-  (Integer/parseInt str))
-    
-(defn is-number?
-  [str]
-  (do
-    (try (Integer/parseInt str) 
-         true
-         (catch Exception e false))))
-    
-(defn in-range?
-  [start end val]
-  (and (>= val start) (<= val end)))
+(def standard-board-length 9)
 
-(defn valid-move?
-  [board num]
-  (and  (in-range? 0 8 num)
-        (empty-space? board num)))
+(def players { 1 [{:marker "X" :type "human"} {:marker "O" :type "human"}]
+               2 [{:marker "X" :type "human"} {:marker "O" :type "ai"}] 
+               3 [{:marker "X" :type "ai"} {:marker "O" :type "ai"}] })
+            
+(defn- begin-selected-game
+  [num]
+  (let [player-1 (first (get players num))
+        player-2 (last (get players num))]
+  (print-to-cli (play-round (generate-empty-board standard-board-length) 
+                (create-proto-player (:marker player-1) (:type player-1))
+                (create-proto-player (:marker player-2) (:type player-2))))))
 
-(defn valid-selection?
-  [board str]
-  (and (is-number? str) 
-       (valid-move? board
-                    (convert-to-num str))))
-        
-(defn handle-game-over
-  [board previous-player]
-  (if (tie? board)
-    (print-to-cli tied-game-message))
-    (print-to-cli (generate-winner-message previous-player)))
-  
-(defn switch-player
-  [current-player]
-  (if (= "X" current-player)
-      "O"
-      "X"))
-
-(defn take-turn 
-  [board current-player]
-  (let [selection (read-line)]
-    (if (valid-selection? board selection)
-        (mark-board board 
-                    (convert-to-num selection) 
-                    current-player)
-        (do (print-to-cli invalid-move-message)
-            (recur board current-player)))))
-    
-(defn play-round
-  [board current-player]
-  (render-board board)
-  (if (game-over? board)
-      (handle-game-over board (switch-player current-player))
-      (do (print-to-cli (generate-move-selection-prompt current-player))
-          (recur (take-turn board current-player)
-                 (switch-player current-player)))))
-
-(defn start-game
+(declare start-tic-tac-toe)
+            
+(defn- handle-end-of-game
   []
-  (play-round (generate-empty-board) "X"))
+  (print-to-cli play-again-prompt)
+  (let [num-for-no 0 num-for-yes 1]
+  (case (get-valid-num-input num-for-no num-for-yes)
+    0 (print-to-cli thank-you-message)
+    1 (start-tic-tac-toe))))
+            
+(defn start-tic-tac-toe
+  []
+  (print-to-cli game-selection-prompt)
+  (let [min (apply min (keys players))
+        max (apply max (keys players))]
+    (begin-selected-game (get-valid-num-input min max))
+    (handle-end-of-game)))

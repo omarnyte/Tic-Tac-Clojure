@@ -4,4 +4,4 @@
 
 (defn -main
   []
-  (gameplay/start-game))
+  (gameplay/start-tic-tac-toe))
